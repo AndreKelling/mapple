@@ -1,0 +1,103 @@
+<?php
+
+/**
+ * The admin-specific functionality of the plugin.
+ *
+ * @link       http://example.com
+ * @since      1.0.0
+ *
+ * @package    Mapple
+ * @subpackage Mapple/admin
+ */
+
+/**
+ * The admin-specific functionality of the plugin.
+ *
+ * Defines the plugin name, version, and two examples hooks for how to
+ * enqueue the admin-specific stylesheet and JavaScript.
+ *
+ * @package    Mapple
+ * @subpackage Mapple/admin
+ * @author     Your Name <email@example.com>
+ */
+class Mapple_Admin {
+
+	/**
+	 * The ID of this plugin.
+	 *
+	 * @since    1.0.0
+	 * @access   private
+	 * @var      string    $mapple    The ID of this plugin.
+	 */
+	private $mapple;
+
+	/**
+	 * The version of this plugin.
+	 *
+	 * @since    1.0.0
+	 * @access   private
+	 * @var      string    $version    The current version of this plugin.
+	 */
+	private $version;
+
+	/**
+	 * Initialize the class and set its properties.
+	 *
+	 * @since    1.0.0
+	 * @param      string    $mapple       The name of this plugin.
+	 * @param      string    $version    The version of this plugin.
+	 */
+	public function __construct( $mapple, $version ) {
+
+		$this->mapple = $mapple;
+		$this->version = $version;
+
+	}
+
+	/**
+	 * Register the stylesheets for the admin area.
+	 *
+	 * @since    1.0.0
+	 */
+	public function enqueue_styles() {
+
+		/**
+		 * This function is provided for demonstration purposes only.
+		 *
+		 * An instance of this class should be passed to the run() function
+		 * defined in Mapple_Loader as all of the hooks are defined
+		 * in that particular class.
+		 *
+		 * The Mapple_Loader will then create the relationship
+		 * between the defined hooks and the functions defined in this
+		 * class.
+		 */
+
+		wp_enqueue_style( $this->mapple, plugin_dir_url( __FILE__ ) . 'css/mapple-admin.css', array(), $this->version, 'all' );
+
+	}
+
+	/**
+	 * Register the JavaScript for the admin area.
+	 *
+	 * @since    1.0.0
+	 */
+	public function enqueue_scripts() {
+
+		/**
+		 * This function is provided for demonstration purposes only.
+		 *
+		 * An instance of this class should be passed to the run() function
+		 * defined in Mapple_Loader as all of the hooks are defined
+		 * in that particular class.
+		 *
+		 * The Mapple_Loader will then create the relationship
+		 * between the defined hooks and the functions defined in this
+		 * class.
+		 */
+
+		wp_enqueue_script( $this->mapple, plugin_dir_url( __FILE__ ) . 'js/mapple-admin.js', array( 'jquery' ), $this->version, false );
+
+	}
+
+}
