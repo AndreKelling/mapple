@@ -18,7 +18,7 @@
  *
  * @package    Mapple
  * @subpackage Mapple/public
- * @author     Your Name <email@example.com>
+ * @author     André Kelling <kontakt@andrekelling.de>
  */
 class Mapple_Public {
 

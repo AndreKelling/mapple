@@ -18,7 +18,7 @@
  * @since      1.0.0
  * @package    Mapple
  * @subpackage Mapple/includes
- * @author     Your Name <email@example.com>
+ * @author     André Kelling <kontakt@andrekelling.de>
  */
 class Mapple_Deactivator {
 
