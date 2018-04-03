@@ -44,9 +44,9 @@ class Mapple {
 	 *
 	 * @since    1.0.0
 	 * @access   protected
-	 * @var      string    $mapple    The string used to uniquely identify this plugin.
+	 * @var      string    $plugin_name    The string used to uniquely identify this plugin.
 	 */
-	protected $mapple;
+	protected $plugin_name;
 
 	/**
 	 * The current version of the plugin.
@@ -72,13 +72,14 @@ class Mapple {
 		} else {
 			$this->version = '1.0.0';
 		}
-		$this->mapple = 'mapple';
+		$this->plugin_name = 'mapple';
 
 		$this->load_dependencies();
 		$this->set_locale();
 		$this->define_admin_hooks();
 		$this->define_public_hooks();
 
+		$this->define_metabox_hooks();
 	}
 
 	/**
@@ -117,6 +118,11 @@ class Mapple {
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-mapple-admin.php';
 
 		/**
+		 * The class responsible for defining all actions relating to metaboxes.
+		 */
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-mapple-admin-metaboxes.php';
+
+		/**
 		 * The class responsible for defining all actions that occur in the public-facing
 		 * side of the site.
 		 */
@@ -152,10 +158,12 @@ class Mapple {
 	 */
 	private function define_admin_hooks() {
 
-		$plugin_admin = new Mapple_Admin( $this->get_mapple(), $this->get_version() );
+		$plugin_admin = new Mapple_Admin( $this->get_plugin_name(), $this->get_version() );
 
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_styles' );
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts' );
+		$this->loader->add_action( 'init', $plugin_admin, 'new_cpt_map_entry' );
+		$this->loader->add_action( 'admin_menu', $plugin_admin, 'add_menu' );
 
 	}
 
@@ -168,12 +176,28 @@ class Mapple {
 	 */
 	private function define_public_hooks() {
 
-		$plugin_public = new Mapple_Public( $this->get_mapple(), $this->get_version() );
+		$plugin_public = new Mapple_Public( $this->get_plugin_name(), $this->get_version() );
 
 		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_styles' );
 		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_scripts' );
 
 	}
+
+	/**
+	 * Register all of the hooks related to metaboxes
+	 *
+	 * @since 		1.0.0
+	 * @access 		private
+	 */
+	private function define_metabox_hooks() {
+
+		$plugin_metaboxes = new Mapple_Admin_Metaboxes( $this->get_plugin_name(), $this->get_version() );
+
+		$this->loader->add_action( 'add_meta_boxes', $plugin_metaboxes, 'add_metaboxes' );
+		$this->loader->add_action( 'add_meta_boxes_mapple', $plugin_metaboxes, 'set_meta' );
+		$this->loader->add_action( 'save_post_mapple', $plugin_metaboxes, 'validate_meta', 10, 2 );
+
+	} // define_metabox_hooks()
 
 	/**
 	 * Run the loader to execute all of the hooks with WordPress.
@@ -191,8 +215,8 @@ class Mapple {
 	 * @since     1.0.0
 	 * @return    string    The name of the plugin.
 	 */
-	public function get_mapple() {
-		return $this->mapple;
+	public function get_plugin_name() {
+		return $this->plugin_name;
 	}
 
 	/**
