@@ -74,7 +74,7 @@ class Mapple_Admin_Metaboxes {
 
 		add_meta_box(
 			'mapple_client_additional_info',
-			apply_filters( $this->plugin_name . '-metabox-title-additional-info', esc_html__( 'Additional Info', 'mapple' ) ),
+			apply_filters( $this->plugin_name . '-metabox-title-additional-info', esc_html__( 'Additional Client Info', 'mapple' ) ),
 			array( $this, 'metabox' ),
 			'mapple',
 			'normal',
@@ -124,6 +124,8 @@ class Mapple_Admin_Metaboxes {
 		$fields = array();
 
 		$fields[] = array( 'client-location', 'text' );
+		$fields[] = array( 'client-url', 'text' );
+		$fields[] = array( 'client-urlname', 'text' );
 
 		return $fields;
 

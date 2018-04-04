@@ -73,34 +73,6 @@ class Mapple_Template_Functions {
 	} // __construct()
 
 	/**
-	 * Includes the mapple-job-title template
-	 *
-	 * @hooked 		mapple-loop-content 		10
-	 *
-	 * @param 		object 		$item 		A post object
-	 * @param 		array 		$meta 		The post metadata
-	 */
-	public function content_job_title( $item, $meta ) {
-
-		include Mapple_get_template( 'mapple-job-title' );
-
-	} // content_job_title()
-
-	/**
-	 * Includes the employee name template file
-	 *
-	 * @hooked 		mapple-loop-content 		15
-	 *
-	 * @param 		object 		$item 		A post object
-	 * @param 		array 		$meta 		The post metadata
-	 */
-	public function content_job_location( $item, $meta ) {
-
-		include Mapple_get_template( 'mapple-job-location' );
-
-	} // content_job_location()
-
-	/**
 	 * Includes the link end template file
 	 *
 	 * @hooked 		mapple-after-loop-content 		10
@@ -214,6 +186,19 @@ class Mapple_Template_Functions {
 	public function single_post_location( $meta ) {
 
 		include Mapple_get_template( 'single-client-meta-location' );
+
+	} // single_post_location()
+
+	/**
+	 * Includes the single client post metadata for location
+	 *
+	 * @hooked 		mapple-single-content 	20
+	 *
+	 * @param 		array 		$meta 		The post metadata
+	 */
+	public function single_post_url( $meta ) {
+
+		include Mapple_get_template( 'single-client-meta-url' );
 
 	} // single_post_location()
 

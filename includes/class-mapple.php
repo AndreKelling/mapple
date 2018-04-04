@@ -231,6 +231,7 @@ class Mapple {
 		$this->loader->add_action( 'mapple-single-content', $plugin_templates, 'single_post_title', 10 );
 		$this->loader->add_action( 'mapple-single-content', $plugin_templates, 'single_post_content', 15 );
 		$this->loader->add_action( 'mapple-single-content', $plugin_templates, 'single_post_location', 25 );
+		$this->loader->add_action( 'mapple-single-content', $plugin_templates, 'single_post_url', 20 );
 		$this->loader->add_action( 'mapple-single-content', $plugin_templates, 'single_post_thumbnail', 5 );
 	} // define_template_hooks()
 

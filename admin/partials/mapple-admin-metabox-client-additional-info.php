@@ -34,4 +34,50 @@ apply_filters( $this->plugin_name . '-field-' . $atts['id'], $atts );
 
 include( plugin_dir_path( __FILE__ ) . $this->plugin_name . '-admin-field-text.php' );
 
+?></p><hr><?php
+
+$atts 					= array();
+$atts['class'] 			= 'widefat';
+$atts['description'] 	= 'enter full URL with http:// or https://';
+$atts['id'] 			= 'client-url';
+$atts['label'] 			= 'Website URL';
+$atts['name'] 			= 'client-url';
+$atts['placeholder'] 	= 'https://andrekelling.de';
+$atts['type'] 			= 'text';
+$atts['value'] 			= '';
+
+if ( ! empty( $this->meta[$atts['id']][0] ) ) {
+
+    $atts['value'] = $this->meta[$atts['id']][0];
+
+}
+
+apply_filters( $this->plugin_name . '-field-' . $atts['id'], $atts );
+
+?><p><?php
+
+include( plugin_dir_path( __FILE__ ) . $this->plugin_name . '-admin-field-text.php' );
+
+$atts 					= array();
+$atts['class'] 			= 'widefat';
+$atts['description'] 	= 'show a different URL title';
+$atts['id'] 			= 'client-urlname';
+$atts['label'] 			= 'Website URL shown name';
+$atts['name'] 			= 'client-urlname';
+$atts['placeholder'] 	= 'andrekelling.de';
+$atts['type'] 			= 'text';
+$atts['value'] 			= '';
+
+if ( ! empty( $this->meta[$atts['id']][0] ) ) {
+
+	$atts['value'] = $this->meta[$atts['id']][0];
+
+}
+
+apply_filters( $this->plugin_name . '-field-' . $atts['id'], $atts );
+
+?><p><?php
+
+include( plugin_dir_path( __FILE__ ) . $this->plugin_name . '-admin-field-text.php' );
+
 ?></p>
