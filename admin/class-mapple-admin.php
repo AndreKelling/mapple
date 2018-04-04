@@ -197,6 +197,8 @@ class Mapple_Admin {
 	/**
 	 * Creates a new taxonomy for a custom post type
 	 *
+	 * @todo: add taxonomy if needed
+	 *
 	 * @since 	1.0.0
 	 * @access 	public
 	 * @uses 	register_taxonomy()

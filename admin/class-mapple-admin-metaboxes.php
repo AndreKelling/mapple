@@ -73,7 +73,7 @@ class Mapple_Admin_Metaboxes {
 		// add_meta_box( $id, $title, $callback, $screen, $context, $priority, $callback_args );
 
 		add_meta_box(
-			'Mapple_client_additional_info',
+			'mapple_client_additional_info',
 			apply_filters( $this->plugin_name . '-metabox-title-additional-info', esc_html__( 'Additional Info', 'mapple' ) ),
 			array( $this, 'metabox' ),
 			'mapple',
@@ -99,14 +99,12 @@ class Mapple_Admin_Metaboxes {
 		$nonces 		= array();
 		$nonce_check 	= 0;
 
-		$nonces[] 		= 'client_requirements_nonce';
 		$nonces[] 		= 'client_additional_info';
-		$nonces[] 		= 'client_files';
 
 		foreach ( $nonces as $nonce ) {
 
 			if ( ! isset( $posted[$nonce] ) ) { $nonce_check++; }
-			if ( isset( $posted[$nonce] ) && ! wp_verify_nonce( $posted[$nonce], $this->plugin_name ) ) { $nonce_check++; }
+			if ( isset( $posted[$nonce] ) && ! wp_verify_nonce( $posted[$nonce], $this->plugin_name ) ) {$nonce_check++;}
 
 		}
 

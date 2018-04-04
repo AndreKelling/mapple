@@ -27,9 +27,9 @@ class Mapple_Public {
 	 *
 	 * @since    1.0.0
 	 * @access   private
-	 * @var      string    $mapple    The ID of this plugin.
+	 * @var      string    $plugin_name    The ID of this plugin.
 	 */
-	private $mapple;
+	private $plugin_name;
 
 	/**
 	 * The version of this plugin.
@@ -44,12 +44,12 @@ class Mapple_Public {
 	 * Initialize the class and set its properties.
 	 *
 	 * @since    1.0.0
-	 * @param      string    $mapple       The name of the plugin.
+	 * @param      string    $plugin_name       The name of the plugin.
 	 * @param      string    $version    The version of this plugin.
 	 */
-	public function __construct( $mapple, $version ) {
+	public function __construct( $plugin_name, $version ) {
 
-		$this->mapple = $mapple;
+		$this->plugin_name = $plugin_name;
 		$this->version = $version;
 
 	}
@@ -73,7 +73,7 @@ class Mapple_Public {
 		 * class.
 		 */
 
-		wp_enqueue_style( $this->mapple, plugin_dir_url( __FILE__ ) . 'css/mapple-public.css', array(), $this->version, 'all' );
+		wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/mapple-public.css', array(), $this->version, 'all' );
 
 	}
 
@@ -96,8 +96,29 @@ class Mapple_Public {
 		 * class.
 		 */
 
-		wp_enqueue_script( $this->mapple, plugin_dir_url( __FILE__ ) . 'js/mapple-public.js', array( 'jquery' ), $this->version, false );
+		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/mapple-public.js', array( 'jquery' ), $this->version, false );
 
 	}
 
+	/**
+	 * Adds a default single view template for a job opening
+	 *
+	 * @param 	string 		$template 		The name of the template
+	 * @return 	mixed 						The single template
+	 */
+	public function single_cpt_template( $template ) {
+
+		global $post;
+
+		$return = $template;
+
+		if ( $post->post_type == 'mapple' ) {
+
+			$return = mapple_get_template( 'single-client' );
+
+		}
+
+		return $return;
+
+	} // single_cpt_template()
 }
