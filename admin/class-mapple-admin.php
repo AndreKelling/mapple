@@ -23,13 +23,22 @@
 class Mapple_Admin {
 
 	/**
+	 * The plugin options.
+	 *
+	 * @since 		1.0.0
+	 * @access 		private
+	 * @var 		string 			$options    The plugin options.
+	 */
+	private $options;
+
+	/**
 	 * The ID of this plugin.
 	 *
-	 * @since    1.0.0
-	 * @access   private
-	 * @var      string    $mapple    The ID of this plugin.
+	 * @since 		1.0.0
+	 * @access 		private
+	 * @var 		string 			$plugin_name 		The ID of this plugin.
 	 */
-	private $mapple;
+	private $plugin_name;
 
 	/**
 	 * The version of this plugin.
@@ -52,6 +61,7 @@ class Mapple_Admin {
 		$this->plugin_name = $plugin_name;
 		$this->version = $version;
 
+		$this->set_options();
 	}
 
 	/**
@@ -99,7 +109,7 @@ class Mapple_Admin {
 		 * class.
 		 */
 
-		wp_enqueue_style( $this->mapple, plugin_dir_url( __FILE__ ) . 'css/mapple-admin.css', array(), $this->version, 'all' );
+		wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/mapple-admin.css', array(), $this->version, 'all' );
 
 	}
 
@@ -122,7 +132,7 @@ class Mapple_Admin {
 		 * class.
 		 */
 
-		wp_enqueue_script( $this->mapple, plugin_dir_url( __FILE__ ) . 'js/mapple-admin.js', array( 'jquery' ), $this->version, false );
+		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/mapple-admin.js', array( 'jquery' ), $this->version, false );
 
 	}
 
@@ -133,7 +143,7 @@ class Mapple_Admin {
 	 * @access 	public
 	 * @uses 	register_post_type()
 	 */
-	public static function new_cpt_map_entry() {
+	public static function new_cpt_mapple() {
 		$cap_type 	= 'post';
 		$plural 	= 'Clients';
 		$single 	= 'Client';
@@ -255,5 +265,174 @@ class Mapple_Admin {
 	public function page_options() {
 		include( plugin_dir_path( __FILE__ ) . 'partials/mapple-admin-page-settings.php' );
 	} // page_options()
+
+	/**
+	 * Creates a text field
+	 *
+	 * @param 	array 		$args 			The arguments for the field
+	 * @return 	string 						The HTML field
+	 */
+	public function field_text( $args ) {
+
+		$defaults['class'] 			= 'widefat';
+		$defaults['description'] 	= '';
+		$defaults['label'] 			= '';
+		$defaults['name'] 			= $this->plugin_name . '-options[' . $args['id'] . ']';
+		$defaults['placeholder'] 	= '';
+		$defaults['type'] 			= 'text';
+		$defaults['value'] 			= '';
+
+		apply_filters( $this->plugin_name . '-field-text-options-defaults', $defaults );
+
+		$atts = wp_parse_args( $args, $defaults );
+
+		if ( ! empty( $this->options[$atts['id']] ) ) {
+
+			$atts['value'] = $this->options[$atts['id']];
+
+		}
+
+		include( plugin_dir_path( __FILE__ ) . 'partials/' . $this->plugin_name . '-admin-field-text.php' );
+
+	} // field_text()
+
+	/**
+	 * Returns an array of options names, fields types, and default values
+	 *
+	 * @return 		array 			An array of options
+	 */
+	public static function get_options_list() {
+
+		$options = array();
+
+		$options[] = array( 'gmap-api-key', 'text', '' );
+
+		return $options;
+
+	} // get_options_list()
+
+	/**
+	 * Registers settings fields with WordPress
+	 */
+	public function register_fields() {
+		//wp_die( print_r( $this ) );
+		// add_settings_field( $id, $title, $callback, $menu_slug, $section, $args );
+
+		add_settings_field(
+			'gmap-api-key',
+			apply_filters( $this->plugin_name . 'label-gmap-api-key', esc_html__( 'Google Maps API key', 'mapple' ) ),
+			array( $this, 'field_text' ),
+			$this->plugin_name,
+			$this->plugin_name . '-api',
+			array(
+				'description' 	=> 'Enter your key and save.',
+				'id' 			=> 'gmap-api-key',
+				'placeholder'   => 'tHiSwIlLbEyOuRkEyToGoOgLeMaPsApI'
+			)
+		);
+	} // register_fields()
+
+	/**
+	 * Registers settings sections with WordPress
+	 */
+	public function register_sections() {
+
+		// add_settings_section( $id, $title, $callback, $menu_slug );
+		//wp_die( print_r( $this->options ) );
+
+		add_settings_section(
+			$this->plugin_name . '-api',
+			apply_filters( $this->plugin_name . 'section-title-api', esc_html__( 'Google Maps', 'mapple' ) ),
+			array( $this, 'section_api' ),
+			$this->plugin_name
+		);
+
+	} // register_sections()
+
+	/**
+	 * Registers plugin settings
+	 *
+	 * @since 		1.0.0
+	 * @return 		void
+	 */
+	public function register_settings() {
+
+		//wp_die( print_r( $this ) );
+		// register_setting( $option_group, $option_name, $sanitize_callback );
+
+		register_setting(
+			$this->plugin_name . '-options',
+			$this->plugin_name . '-options',
+			array( $this, 'validate_options' )
+		);
+
+	} // register_settings()
+
+	/**
+	 * Creates a settings section
+	 *
+	 * @since 		1.0.0
+	 * @param 		array 		$params 		Array of parameters for the section
+	 * @return 		mixed 						The settings section
+	 */
+	public function section_api(  ) {
+
+		include( plugin_dir_path( __FILE__ ) . 'partials/mapple-admin-settings-section-api.php' );
+
+	} // section_api()
+
+	private function sanitizer( $type, $data ) {
+
+		if ( empty( $type ) ) { return; }
+		if ( empty( $data ) ) { return; }
+
+		$return 	= '';
+		$sanitizer 	= new Now_Hiring_Sanitize();
+
+		$sanitizer->set_data( $data );
+		$sanitizer->set_type( $type );
+
+		$return = $sanitizer->clean();
+
+		unset( $sanitizer );
+
+		return $return;
+
+	} // sanitizer()
+
+	/**
+	 * Sets the class variable $options
+	 */
+	private function set_options() {
+
+		$this->options = get_option( $this->plugin_name . '-options' );
+
+	} // set_options()
+
+	/**
+	 * Validates saved options
+	 *
+	 * @since 		1.0.0
+	 * @param 		array 		$input 			array of submitted plugin options
+	 * @return 		array 						array of validated plugin options
+	 */
+	public function validate_options( $input ) {
+
+		$valid 		= array();
+		$options 	= $this->get_options_list();
+
+		//wp_die( print_r( $options ) );
+
+		foreach ( $options as $option ) {
+
+			$name = $option[0];
+			$type = $option[1];
+
+			$valid[$option[0]] = $this->sanitizer( $type, $input[$name] );
+		}
+
+		return $valid;
+
+	} // validate_options()
 
 }
