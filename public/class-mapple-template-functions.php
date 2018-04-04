@@ -73,6 +73,18 @@ class Mapple_Template_Functions {
 	} // __construct()
 
 	/**
+	 * Includes the client map template file
+	 *
+	 * @hooked 		mapple-loop-content 		15
+	 *
+	 */
+	public function content_client_map() {
+
+		include Mapple_get_template( 'mapple-client-map' );
+
+	} // content_client_map()
+
+	/**
 	 * Includes the mapple-client-title template
 	 *
 	 * @hooked 		mapple-loop-content 		10

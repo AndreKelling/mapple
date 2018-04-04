@@ -96,7 +96,22 @@ class Mapple_Public {
 		 * class.
 		 */
 
-		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/mapple-public.js', array( 'jquery' ), $this->version, false );
+		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/mapple-public.js', array($this->plugin_name.'gmaps'), $this->version, true );
+
+		$dataToBePassed = array(
+			'home'            => get_stylesheet_directory_uri(),
+			'pleaseWaitLabel' => __( 'Please wait...', 'default' )
+		);
+		wp_localize_script( $this->plugin_name, 'php_vars', $dataToBePassed );
+
+
+		$options 	= get_option( $this->plugin_name . '-options' );
+		$apiKey 	= $options['gmap-api-key'];
+
+		if(! empty($apiKey)){
+			wp_enqueue_script($this->plugin_name.'gmaps' , 'https://maps.googleapis.com/maps/api/js?key='.$apiKey, '', $this->version, true );
+		}
+
 
 	}
 
@@ -127,7 +142,6 @@ class Mapple_Public {
 	 *
 	 * @param   array	$atts		The attributes from the shortcode
 	 *
-	 * @uses	get_option
 	 * @uses	get_layout
 	 *
 	 * @return	mixed	$output		Output of the buffer
