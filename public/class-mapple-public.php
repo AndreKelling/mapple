@@ -121,4 +121,55 @@ class Mapple_Public {
 		return $return;
 
 	} // single_cpt_template()
+
+	/**
+	 * Processes shortcode mapple-map
+	 *
+	 * @param   array	$atts		The attributes from the shortcode
+	 *
+	 * @uses	get_option
+	 * @uses	get_layout
+	 *
+	 * @return	mixed	$output		Output of the buffer
+	 */
+	public function map( $atts = array() ) {
+
+		ob_start();
+
+		$defaults['loop-template'] 	= $this->plugin_name . '-loop-map';
+		$defaults['order'] 			= 'date';
+		$defaults['quantity'] 		= 100;
+		$args						= shortcode_atts( $defaults, $atts, 'mapple' );
+		$shared 					= new Mapple_Shared( $this->plugin_name, $this->version );
+		$items 						= $shared->get_clients( $args );
+
+		if ( is_array( $items ) || is_object( $items ) ) {
+
+			include mapple_get_template( $args['loop-template'] );
+
+		} else {
+
+			echo $items;
+
+		}
+
+		$output = ob_get_contents();
+
+		ob_end_clean();
+
+		return $output;
+
+	} // map()
+
+	/**
+	 * Registers all shortcodes at once
+	 *
+	 * @return [type] [description]
+	 */
+	public function register_shortcodes() {
+
+		add_shortcode( 'mapple_map', array( $this, 'map' ) );
+		add_shortcode( 'mapple_clients', array( $this, 'clients' ) );
+
+	} // register_shortcodes()
 }

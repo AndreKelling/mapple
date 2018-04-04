@@ -73,6 +73,34 @@ class Mapple_Template_Functions {
 	} // __construct()
 
 	/**
+	 * Includes the mapple-client-title template
+	 *
+	 * @hooked 		mapple-loop-content 		10
+	 *
+	 * @param 		object 		$item 		A post object
+	 * @param 		array 		$meta 		The post metadata
+	 */
+	public function content_client_title( $item, $meta ) {
+
+		include Mapple_get_template( 'mapple-client-title' );
+
+	} // content_client_title()
+
+	/**
+	 * Includes the client location template file
+	 *
+	 * @hooked 		mapple-loop-content 		15
+	 *
+	 * @param 		object 		$item 		A post object
+	 * @param 		array 		$meta 		The post metadata
+	 */
+	public function content_client_location( $item, $meta ) {
+
+		include Mapple_get_template( 'mapple-client-location' );
+
+	} // content_client_location()
+
+	/**
 	 * Includes the link end template file
 	 *
 	 * @hooked 		mapple-after-loop-content 		10

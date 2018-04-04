@@ -138,6 +138,11 @@ class Mapple {
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/mapple-global-functions.php';
 
 		/**
+		 * The class responsible for defining all actions shared by the Dashboard and public-facing sides.
+		 */
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-mapple-shared.php';
+
+		/**
 		 * The class responsible for defining all actions that occur in the public-facing
 		 * side of the site.
 		 */
@@ -209,6 +214,17 @@ class Mapple {
 		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_styles' );
 		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_scripts' );
 		$this->loader->add_filter( 'single_template', $plugin_public, 'single_cpt_template' );
+		$this->loader->add_action( 'init', $plugin_public, 'register_shortcodes' );
+
+		/**
+		 * Action instead of template tag.
+		 *
+		 * do_action( 'mapple_map' );
+		 *
+		 * @link 	http://nacin.com/2010/05/18/rethinking-template-tags-in-plugins/
+		 */
+		$this->loader->add_action( 'mapple_map', $plugin_public, 'map' );
+		$this->loader->add_action( 'mapple_clients', $plugin_public, 'clients' );
 	}
 
 	/**
@@ -225,7 +241,8 @@ class Mapple {
 		$this->loader->add_action( 'mapple-before-loop', $plugin_templates, 'list_wrap_start', 10 );
 		$this->loader->add_action( 'mapple-before-loop-content', $plugin_templates, 'content_wrap_start', 10, 2 );
 		$this->loader->add_action( 'mapple-before-loop-content', $plugin_templates, 'content_link_start', 15, 2 );
-		$this->loader->add_action( 'mapple-loop-content', $plugin_templates, 'content_job_title', 10, 2 );
+		$this->loader->add_action( 'mapple-loop-content', $plugin_templates, 'content_client_title', 10, 2 );
+		$this->loader->add_action( 'mapple-loop-content', $plugin_templates, 'content_client_location', 15, 2 );
 		$this->loader->add_action( 'mapple-after-loop-content', $plugin_templates, 'content_link_end', 10, 2 );
 		$this->loader->add_action( 'mapple-after-loop-content', $plugin_templates, 'content_wrap_end', 90, 2 );
 		$this->loader->add_action( 'mapple-after-loop', $plugin_templates, 'list_wrap_end', 10 );
