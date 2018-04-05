@@ -147,6 +147,12 @@ class Mapple_Admin_Metaboxes {
 
 	} // metabox()
 
+	/**
+	 * @param $type
+	 * @param $data
+	 *
+	 * @return mixed|string|void
+	 */
 	private function sanitizer( $type, $data ) {
 		//wp_die( '<pre>' . print_r( $type ) . '</pre>' );
 		if ( empty( $type ) ) { return; }
@@ -224,5 +230,22 @@ class Mapple_Admin_Metaboxes {
 		} // foreach
 
 	} // validate_meta()
+
+	/**
+	 * Add posts meta field to rest_api callback
+	 */
+	function filter_clients_json( $data, $post ) {
+		$location = get_post_meta( $post->ID, 'client-location', true );
+		$url = get_post_meta( $post->ID, 'client-url', true );
+		$urlName = get_post_meta( $post->ID, 'client-urlname', true );
+
+		if( $location ) {
+			$data->data['location'] = $location;
+			$data->data['url'] = $url;
+			$data->data['urlname'] = $urlName;
+		}
+
+		return $data;
+	}
 
 } // class

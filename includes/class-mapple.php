@@ -269,6 +269,7 @@ class Mapple {
 		$this->loader->add_action( 'add_meta_boxes', $plugin_metaboxes, 'add_metaboxes' );
 		$this->loader->add_action( 'add_meta_boxes_clients', $plugin_metaboxes, 'set_meta' );
 		$this->loader->add_action( 'save_post_clients', $plugin_metaboxes, 'validate_meta', 10, 2 );
+		$this->loader->add_action( 'rest_prepare_clients', $plugin_metaboxes,'filter_clients_json', 10, 2);
 
 	} // define_metabox_hooks()
 
