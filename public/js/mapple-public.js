@@ -2,20 +2,27 @@
 
 const Mapple = function() {
 
-    let plugin = {};
+    const plugin = {};
 
     const settings = {
         phpVars: php_vars
     };
 
+    plugin.init = function() {
+        document.querySelectorAll('[data-mapple]').forEach(function (el) {
+            plugin[el.dataset.mapple](el);
+        })
+    };
+
     plugin.initMap = function() {
 
-    	// Creating a LatLng object containing the coordinate for the center of the map
-        var secheltLoc = new google.maps.LatLng(52.517780, 13.406229);
+        const bounds = new google.maps.LatLngBounds();
+        const infowindow = new google.maps.InfoWindow();
 
-        // Creating an object literal containing the properties we want to pass to the map
-        var myMapOptions = {
-            zoom: 11,
+        const secheltLoc = new google.maps.LatLng(52.517780, 13.406229);
+
+        const myMapOptions = {
+            //zoom: 11, not needed as automatically adjusted by extendBounds
             center: secheltLoc,
             mapTypeId: google.maps.MapTypeId.ROADMAP,
             scrollwheel: false,
@@ -26,25 +33,56 @@ const Mapple = function() {
             panControl: true
         };
 
-   		//console.log(settings.phpVars);
+        const theMap = new google.maps.Map(document.getElementById("mapple-canvas"), myMapOptions);
 
-        // Calling the constructor, thereby initializing the map
-        var theMap = new google.maps.Map(document.getElementById("mapple-canvas"), myMapOptions);
+        plugin.loadJSON(function(response) {
+            const actualJSON = JSON.parse(response);
 
-        // Define Marker properties
-        // var image = new google.maps.MarkerImage("assets/templates/holodeck/images/map-marker.png",
-        //     // This marker is 26 pixels wide by 33 pixels tall.
-        //     new google.maps.Size(26, 33),
-        //     // The origin for this image is 0,0.
-        //     new google.maps.Point(0,0),
-        //     // The anchor for this image is the base of the flagpole at 18,42.
-        //     new google.maps.Point(13, 33)
-        // );
+            //console.log(actualJSON.length);
+
+            for(let i = 0; i < actualJSON.length; i++) {
+
+            	// strip out all white spaces
+                let geolocation = actualJSON[i].location.replace(/\s/g,'');
+                geolocation = geolocation.split(',')
+
+                const marker = new google.maps.Marker({
+                    position: new google.maps.LatLng(geolocation[0],geolocation[1]),
+                    map: theMap,
+                    title: actualJSON[i].title.rendered
+                });
+
+                bounds.extend(marker.position);
+
+                google.maps.event.addListener(marker, 'click', (function(marker, i) {
+                    return function() {
+                        infowindow.setContent(geolocation[0]);
+                        infowindow.open(theMap, marker);
+                    }
+                })(marker, i));
+            }
+
+            //now fit the map to the newly inclusive bounds
+            theMap.fitBounds(bounds);
+        });
+    };
+
+    plugin.loadJSON = function(callback) {
+        const xobj = new XMLHttpRequest();
+        xobj.overrideMimeType("application/json");
+        xobj.open('GET', '/wp-json/wp/v2/clients', true); // Replace 'my_data' with the path to your file
+        xobj.onreadystatechange = function () {
+            if (xobj.readyState == 4 && xobj.status == "200") {
+                // Required use of an anonymous callback as .open will NOT return a value but simply returns undefined in asynchronous mode
+                callback(xobj.responseText);
+            }
+        };
+        xobj.send(null);
     };
 
     return {
-        initMap: plugin.initMap
+        init: plugin.init
     };
 };
 
-Mapple().initMap();
+Mapple().init();

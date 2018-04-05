@@ -4,7 +4,7 @@
  */
 
 ?>
-<div id="mapple-canvas"></div>
+<div id="mapple-canvas" data-mapple="initMap"></div>
 <style>
     #mapple-canvas {
         height: 400px;
