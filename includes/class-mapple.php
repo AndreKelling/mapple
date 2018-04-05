@@ -192,7 +192,7 @@ class Mapple {
 
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_styles' );
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts' );
-		$this->loader->add_action( 'init', $plugin_admin, 'new_cpt_mapple' );
+		$this->loader->add_action( 'init', $plugin_admin, 'new_cpt_clients' );
 		$this->loader->add_action( 'admin_menu', $plugin_admin, 'add_menu' );
 		$this->loader->add_action( 'admin_init', $plugin_admin, 'register_settings' );
 		$this->loader->add_action( 'admin_init', $plugin_admin, 'register_sections' );
@@ -267,8 +267,8 @@ class Mapple {
 		$plugin_metaboxes = new Mapple_Admin_Metaboxes( $this->get_plugin_name(), $this->get_version() );
 
 		$this->loader->add_action( 'add_meta_boxes', $plugin_metaboxes, 'add_metaboxes' );
-		$this->loader->add_action( 'add_meta_boxes_mapple', $plugin_metaboxes, 'set_meta' );
-		$this->loader->add_action( 'save_post_mapple', $plugin_metaboxes, 'validate_meta', 10, 2 );
+		$this->loader->add_action( 'add_meta_boxes_clients', $plugin_metaboxes, 'set_meta' );
+		$this->loader->add_action( 'save_post_clients', $plugin_metaboxes, 'validate_meta', 10, 2 );
 
 	} // define_metabox_hooks()
 

@@ -127,7 +127,7 @@ class Mapple_Public {
 
 		$return = $template;
 
-		if ( $post->post_type == 'mapple' ) {
+		if ( $post->post_type == 'clients' ) {
 
 			$return = mapple_get_template( 'single-client' );
 

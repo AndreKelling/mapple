@@ -80,7 +80,7 @@ class Mapple_Admin {
 		// add_submenu_page( $parent_slug, $page_title, $menu_title, $capability, $menu_slug, $function);
 
 		add_submenu_page(
-			'edit.php?post_type=mapple',
+			'edit.php?post_type=clients',
 			apply_filters( $this->plugin_name . '-settings-page-title', esc_html__( 'Mapple Settings', 'mapple' ) ),
 			apply_filters( $this->plugin_name . '-settings-menu-title', esc_html__( 'Settings', 'mapple' ) ),
 			'manage_options',
@@ -143,11 +143,11 @@ class Mapple_Admin {
 	 * @access 	public
 	 * @uses 	register_post_type()
 	 */
-	public static function new_cpt_mapple() {
+	public static function new_cpt_clients() {
 		$cap_type 	= 'post';
 		$plural 	= 'Clients';
 		$single 	= 'Client';
-		$cpt_name 	= 'mapple';
+		$cpt_name 	= 'clients';
 		$opts['can_export']								= TRUE;
 		$opts['capability_type']						= $cap_type;
 		$opts['description']							= '';
@@ -168,6 +168,8 @@ class Mapple_Admin {
 		$opts['show_ui']								= TRUE;
 		$opts['supports']								= array( 'title', 'editor', 'thumbnail' );
 		$opts['taxonomies']								= array();
+		$opts['show_in_rest']                           = TRUE;
+  		$opts['rest_controller_class']                  = 'WP_REST_Posts_Controller';
 		$opts['capabilities']['delete_others_posts']	= "delete_others_{$cap_type}s";
 		$opts['capabilities']['delete_post']			= "delete_{$cap_type}";
 		$opts['capabilities']['delete_posts']			= "delete_{$cap_type}s";
@@ -198,11 +200,11 @@ class Mapple_Admin {
 		$opts['rewrite']['ep_mask']						= EP_PERMALINK;
 		$opts['rewrite']['feeds']						= FALSE;
 		$opts['rewrite']['pages']						= TRUE;
-		$opts['rewrite']['slug']						= esc_html__( strtolower( 'clients' ), 'mapple' );
+		$opts['rewrite']['slug']						= esc_html__( strtolower( $cpt_name ), 'mapple' );
 		$opts['rewrite']['with_front']					= FALSE;
-		$opts = apply_filters( 'mapple-cpt-options', $opts );
+		$opts = apply_filters( $cpt_name.'-cpt-options', $opts );
 		register_post_type( strtolower( $cpt_name ), $opts );
-	} // new_cpt_map_entry()
+	} // new_cpt_clients()
 
 	/**
 	 * Creates a new taxonomy for a custom post type
@@ -216,7 +218,7 @@ class Mapple_Admin {
 	public static function new_taxonomy_type() {
 		$plural 	= 'Types';
 		$single 	= 'Type';
-		$tax_name 	= 'mapple_type';
+		$tax_name 	= 'clients_type';
 		$opts['hierarchical']							= TRUE;
 		//$opts['meta_box_cb'] 							= '';
 		$opts['public']									= TRUE;
@@ -226,6 +228,8 @@ class Mapple_Admin {
 		$opts['show_tag_cloud'] 						= TRUE;
 		$opts['show_ui']								= TRUE;
 		$opts['sort'] 									= '';
+		$opts['show_in_rest']                           = TRUE;
+  		$opts['rest_controller_class']                  = 'WP_REST_Terms_Controller';
 		//$opts['update_count_callback'] 					= '';
 		$opts['capabilities']['assign_terms'] 			= 'edit_posts';
 		$opts['capabilities']['delete_terms'] 			= 'manage_categories';

@@ -76,7 +76,7 @@ class Mapple_Admin_Metaboxes {
 			'mapple_client_additional_info',
 			apply_filters( $this->plugin_name . '-metabox-title-additional-info', esc_html__( 'Additional Client Info', 'mapple' ) ),
 			array( $this, 'metabox' ),
-			'mapple',
+			'clients',
 			'normal',
 			'default',
 			array(
@@ -141,14 +141,14 @@ class Mapple_Admin_Metaboxes {
 	public function metabox( $post, $params ) {
 
 		if ( ! is_admin() ) { return; }
-		if ( 'mapple' !== $post->post_type ) { return; }
+		if ( 'clients' !== $post->post_type ) { return; }
 
 		include( plugin_dir_path( __FILE__ ) . 'partials/mapple-admin-metabox-' . $params['args']['file'] . '.php' );
 
 	} // metabox()
 
 	private function sanitizer( $type, $data ) {
-
+		//wp_die( '<pre>' . print_r( $type ) . '</pre>' );
 		if ( empty( $type ) ) { return; }
 		if ( empty( $data ) ) { return; }
 
@@ -167,32 +167,14 @@ class Mapple_Admin_Metaboxes {
 	} // sanitizer()
 
 	/**
-	 * Saves button order when buttons are sorted.
-	 */
-	public function save_files_order() {
-
-		check_ajax_referer( 'mapple-file-order-nonce', 'fileordernonce' );
-
-		$order 						= $this->meta['file-order'];
-		$new_order 					= implode( ',', $_POST['file-order'] );
-		$this->meta['file-order'] 	= $new_order;
-		$update 					= update_post_meta( 'file-order', $new_order );
-
-		esc_html_e( 'File order saved.', 'mapple' );
-
-		die();
-
-	} // save_files_order()
-
-	/**
 	 * Sets the class variable $options
 	 */
 	public function set_meta() {
 
 		global $post;
-
+		//wp_die( '<pre>' . print_r( $post ) . '</pre>' );
 		if ( empty( $post ) ) { return; }
-		if ( 'mapple' != $post->post_type ) { return; }
+		if ( 'clients' != $post->post_type ) { return; }
 
 		//wp_die( '<pre>' . print_r( $post->ID ) . '</pre>' );
 
@@ -222,7 +204,7 @@ class Mapple_Admin_Metaboxes {
 
 		if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) { return $post_id; }
 		if ( ! current_user_can( 'edit_post', $post_id ) ) { return $post_id; }
-		if ( 'mapple' !== $object->post_type ) { return $post_id; }
+		if ( 'clients' !== $object->post_type ) { return $post_id; }
 
 		$nonce_check = $this->check_nonces( $_POST );
 

@@ -51,7 +51,7 @@ class Mapple_Shared {
 	 * Returns a post object of mapple posts
 	 *
 	 * @param 	array 		$params 			An array of optional parameters
-	 * 							types 			An array of mapple item type slugs
+	 * 							types 			An array of clients item type slugs
 	 * 							quantity		Number of posts to return
 	 * @param 	string 		$cache 				String to create a new cache of posts
 	 *
@@ -60,7 +60,7 @@ class Mapple_Shared {
 	public function get_clients( $params, $cache = '' ) {
 
 		$return 	= '';
-		$cache_name = $this->plugin_name . '_client_posts';
+		$cache_name = $this->plugin_name . '_clients_posts';
 
 		if ( ! empty( $cache ) ) {
 
@@ -68,7 +68,7 @@ class Mapple_Shared {
 
 		}
 
-		$return = wp_cache_get( $cache_name, $this->plugin_name . '_client_posts' );
+		$return = wp_cache_get( $cache_name, $this->plugin_name . '_clients_posts' );
 
 
 
@@ -85,7 +85,7 @@ class Mapple_Shared {
 
 			} else {
 
-				wp_cache_set( $cache_name, $query->posts, $this->plugin_name . '_client_posts', 5 * MINUTE_IN_SECONDS );
+				wp_cache_set( $cache_name, $query->posts, $this->plugin_name . '_clients_posts', 5 * MINUTE_IN_SECONDS );
 
 				$return = $query->posts;
 
@@ -112,7 +112,7 @@ class Mapple_Shared {
 		$args['orderby'] 				= $params['order'];
 		$args['posts_per_page'] 		= absint( $params['quantity'] );
 		$args['post_status'] 			= 'publish';
-		$args['post_type'] 				= 'mapple';
+		$args['post_type'] 				= 'clients';
 		$args['update_post_term_cache'] = false;
 
 		unset( $params['order'] );
