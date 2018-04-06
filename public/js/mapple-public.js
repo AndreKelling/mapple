@@ -5,7 +5,8 @@ const Mapple = function() {
     const plugin = {};
 
     const settings = {
-        phpVars: php_vars
+        bounds: new google.maps.LatLngBounds(),
+        infowindow: new google.maps.InfoWindow()
     };
 
     plugin.init = function() {
@@ -15,15 +16,9 @@ const Mapple = function() {
     };
 
     plugin.initMap = function() {
-
-        const bounds = new google.maps.LatLngBounds();
-        const infowindow = new google.maps.InfoWindow();
-
-        const secheltLoc = new google.maps.LatLng(52.517780, 13.406229);
-
         const myMapOptions = {
             //zoom: 11, not needed as automatically adjusted by extendBounds
-            center: secheltLoc,
+            //center: settings.secheltLoc,  not needed as automatically adjusted by extendBounds
             mapTypeId: google.maps.MapTypeId.ROADMAP,
             scrollwheel: false,
             draggable: true,
@@ -38,34 +33,55 @@ const Mapple = function() {
         plugin.loadJSON(function(response) {
             const actualJSON = JSON.parse(response);
 
-            //console.log(actualJSON.length);
-
             for(let i = 0; i < actualJSON.length; i++) {
 
-            	// strip out all white spaces
-                let geolocation = actualJSON[i].location.replace(/\s/g,'');
-                geolocation = geolocation.split(',')
+				if (actualJSON[i].location){
+                    plugin.setMarker(actualJSON[i], i, theMap);
+				}
 
-                const marker = new google.maps.Marker({
-                    position: new google.maps.LatLng(geolocation[0],geolocation[1]),
-                    map: theMap,
-                    title: actualJSON[i].title.rendered
-                });
-
-                bounds.extend(marker.position);
-
-                google.maps.event.addListener(marker, 'click', (function(marker, i) {
-                    return function() {
-                        infowindow.setContent(geolocation[0]);
-                        infowindow.open(theMap, marker);
-                    }
-                })(marker, i));
             }
 
             //now fit the map to the newly inclusive bounds
-            theMap.fitBounds(bounds);
+            theMap.fitBounds(settings.bounds);
         });
     };
+
+    plugin.setMarker = function(client, i, theMap) {
+    	const clientTitle = client.title.rendered;
+        // strip out all white spaces
+        let geolocation = client.location.replace(/\s/g,'');
+        geolocation = geolocation.split(',')
+
+        const marker = new google.maps.Marker({
+            position: new google.maps.LatLng(geolocation[0],geolocation[1]),
+            map: theMap,
+            title: clientTitle
+        });
+
+        let infowindowContent = clientTitle;
+
+        if (client.url){
+            let clientUrlName = client.url;
+
+            if (client.urlname){
+                clientUrlName = client.urlname;
+			}
+
+            const clientLink = '<br><a href="' + client.url + '" target="_blank">' + clientUrlName + '</a>';
+            infowindowContent = infowindowContent + clientLink;
+        }
+        
+        infowindowContent = '<p>' + infowindowContent + '</p>';
+
+        settings.bounds.extend(marker.position);
+
+        google.maps.event.addListener(marker, 'click', (function(marker, i) {
+            return function() {
+                settings.infowindow.setContent(infowindowContent);
+                settings.infowindow.open(theMap, marker);
+            }
+        })(marker, i));
+	};
 
     plugin.loadJSON = function(callback) {
         const xobj = new XMLHttpRequest();

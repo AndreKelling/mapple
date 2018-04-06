@@ -14,7 +14,7 @@ wp_nonce_field( $this->plugin_name, 'client_additional_info' );
 
 $atts 					= array();
 $atts['class'] 			= 'widefat';
-$atts['description'] 	= 'enter Geo data like "52.457072, 13.510904" (without ")';
+$atts['description'] 	= 'enter Geo data like "52.457072, 13.510904". If not filled client won\'t appear on map!';
 $atts['id'] 			= 'client-location';
 $atts['label'] 			= 'Location';
 $atts['name'] 			= 'client-location';
