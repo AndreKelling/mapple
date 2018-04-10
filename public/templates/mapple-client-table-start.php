@@ -1,18 +1,18 @@
-<table id="mapple-clients" class="table-responsive-full sort-table" data-mapple="sortableTable">
+<table class="mapple__table" data-mapple="sortableTable">
     <thead>
     <tr>
-        <th class="title">
-            <button class="mapple__sort" data-mapple-sort="title" title="<?php echo __( 'sort', 'mapple' ) ?>" data-mapple-sort-asc></button>
+        <th class="mapple__sort--title">
+            <button class="mapple__sort" data-mapple-sort="mapple__sort--title" title="<?php echo __( 'sort', 'mapple' ) ?>" data-mapple-sort-asc></button>
             <?php echo __( 'Title', 'mapple' ) ?>
         </th>
-        <th class="description">
+        <th class="mapple__sort--description">
             <?php echo __( 'Description', 'mapple' ) ?>
         </th>
-        <th class="location">
+        <th class="mapple__sort--location">
             <button class="mapple__sort" data-mapple-sort="location" title="<?php echo __( 'sort', 'mapple' ) ?>"></button>
             Location
         </th>
-        <th class="link">
+        <th class="mapple__sort--link">
             <?php echo __( 'Link', 'mapple' ) ?>
         </th>
     </tr>
