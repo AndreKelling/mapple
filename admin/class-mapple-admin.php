@@ -166,7 +166,7 @@ class Mapple_Admin {
 		$opts['show_in_menu']							= TRUE;
 		$opts['show_in_nav_menu']						= TRUE;
 		$opts['show_ui']								= TRUE;
-		$opts['supports']								= array( 'title', 'editor', 'thumbnail' );
+		$opts['supports']								= array( 'title', 'editor', 'excerpt', 'thumbnail' );
 		$opts['taxonomies']								= array();
 		$opts['show_in_rest']                           = TRUE;
   		$opts['rest_controller_class']                  = 'WP_REST_Posts_Controller';
