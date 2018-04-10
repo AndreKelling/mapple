@@ -145,7 +145,7 @@ class Mapple_Public {
 	 * @return string
 	 */
 	public function mappleMap() {
-		return '<div id="mapple-canvas" data-mapple="initMap"></div>';
+		return '<div class="mapple__canvas" data-mapple="initMap"></div>';
 	} // mappleMap()
 
 	/**

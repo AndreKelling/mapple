@@ -1,6 +1,6 @@
 /* map canvas */
 
-#mapple-canvas {
+.mapple__canvas {
 	height: 400px;
 	width: 100%;
 }

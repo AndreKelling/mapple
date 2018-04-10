@@ -15,7 +15,7 @@ const Mapple = function() {
         })
     };
 
-    plugin.initMap = function() {
+    plugin.initMap = function(el) {
         const myMapOptions = {
             //zoom: 11, not needed as automatically adjusted by extendBounds
             //center: settings.secheltLoc,  not needed as automatically adjusted by extendBounds
@@ -28,7 +28,7 @@ const Mapple = function() {
             panControl: true
         };
 
-        const theMap = new google.maps.Map(document.getElementById("mapple-canvas"), myMapOptions);
+        const theMap = new google.maps.Map(el, myMapOptions);
 
         plugin.loadJSON(function(response) {
             const actualJSON = JSON.parse(response);
