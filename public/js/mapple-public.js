@@ -70,7 +70,7 @@ const Mapple = function() {
             const clientLink = '<br><a href="' + client.url + '" target="_blank">' + clientUrlName + '</a>';
             infowindowContent = infowindowContent + clientLink;
         }
-        
+
         infowindowContent = '<p>' + infowindowContent + '</p>';
 
         settings.bounds.extend(marker.position);

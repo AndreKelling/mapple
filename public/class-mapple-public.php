@@ -137,8 +137,19 @@ class Mapple_Public {
 
 	} // single_cpt_template()
 
+
 	/**
-	 * Processes shortcode mapple-map
+	 * Processes shortcode mapple_map
+	 * output just a div which will self initialise the google map
+	 *
+	 * @return string
+	 */
+	public function mappleMap() {
+		return '<div id="mapple-canvas" data-mapple="initMap"></div>';
+	} // mappleMap()
+
+	/**
+	 * Processes shortcode mapple_clients
 	 *
 	 * @param   array	$atts		The attributes from the shortcode
 	 *
@@ -146,11 +157,11 @@ class Mapple_Public {
 	 *
 	 * @return	mixed	$output		Output of the buffer
 	 */
-	public function map( $atts = array() ) {
+	public function mappleClients( $atts = array() ) {
 
 		ob_start();
 
-		$defaults['loop-template'] 	= $this->plugin_name . '-loop-map';
+		$defaults['loop-template'] 	= $this->plugin_name . '-loop-clients';
 		$defaults['order'] 			= 'date';
 		$defaults['quantity'] 		= 100;
 		$args						= shortcode_atts( $defaults, $atts, 'mapple' );
@@ -173,7 +184,7 @@ class Mapple_Public {
 
 		return $output;
 
-	} // map()
+	} // mappleClients()
 
 	/**
 	 * Registers all shortcodes at once
@@ -182,8 +193,8 @@ class Mapple_Public {
 	 */
 	public function register_shortcodes() {
 
-		add_shortcode( 'mapple_map', array( $this, 'map' ) );
-		add_shortcode( 'mapple_clients', array( $this, 'clients' ) );
+		add_shortcode( 'mapple_map', array( $this, 'mappleMap' ) );
+		add_shortcode( 'mapple_clients', array( $this, 'mappleClients' ) );
 
 	} // register_shortcodes()
 }

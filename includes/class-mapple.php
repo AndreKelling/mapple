@@ -239,7 +239,6 @@ class Mapple {
 
 		// Loop
 		$this->loader->add_action( 'mapple-before-loop', $plugin_templates, 'list_wrap_start', 10 );
-		$this->loader->add_action( 'mapple-before-loop', $plugin_templates, 'content_client_map', 15 );
 		$this->loader->add_action( 'mapple-before-loop-content', $plugin_templates, 'content_wrap_start', 10, 2 );
 		$this->loader->add_action( 'mapple-before-loop-content', $plugin_templates, 'content_link_start', 15, 2 );
 		$this->loader->add_action( 'mapple-loop-content', $plugin_templates, 'content_client_title', 10, 2 );
