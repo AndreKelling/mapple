@@ -80,105 +80,20 @@ class Mapple_Template_Functions {
 	 * @param 		object 		$item 		A post object
 	 * @param 		array 		$meta 		The post metadata
 	 */
-	public function content_client_title( $item, $meta ) {
+	public function content_client_content( $item, $meta ) {
 
-		include Mapple_get_template( 'mapple-client-title' );
+		include Mapple_get_template( 'mapple-client-content' );
 
 	} // content_client_title()
-
-	/**
-	 * Includes the client location template file
-	 *
-	 * @hooked 		mapple-loop-content 		15
-	 *
-	 * @param 		object 		$item 		A post object
-	 * @param 		array 		$meta 		The post metadata
-	 */
-	public function content_client_location( $item, $meta ) {
-
-		include Mapple_get_template( 'mapple-client-location' );
-
-	} // content_client_location()
-
-	/**
-	 * Includes the link end template file
-	 *
-	 * @hooked 		mapple-after-loop-content 		10
-	 *
-	 * @param 		object 		$item 		A post object
-	 * @param 		array 		$meta 		The post metadata
-	 */
-	public function content_link_end( $item, $meta ) {
-
-		include Mapple_get_template( 'mapple-content-link-end' );
-
-	} // content_link_end()
-
-	/**
-	 * Includes the link start template file
-	 *
-	 * @hooked 		mapple-before-loop-content 		15
-	 *
-	 * @param 		object 		$item 		A post object
-	 * @param 		array 		$meta 		The post metadata
-	 */
-	public function content_link_start( $item, $meta ) {
-
-		include Mapple_get_template( 'mapple-content-link-start' );
-
-	} // content_link_start()
-
-	/**
-	 * Includes the content wrap end template file
-	 *
-	 * @hooked 		mapple-after-loop-content 		90
-	 *
-	 * @param 		object 		$item 		A post object
-	 * @param 		array 		$meta 		The post metadata
-	 */
-	public function content_wrap_end( $item, $meta ) {
-
-		include Mapple_get_template( 'mapple-content-wrap-end' );
-
-	} // content_wrap_end()
-
-	/**
-	 * Includes the content wrap start template file
-	 *
-	 * @hooked 		mapple-before-loop-content 		10
-	 */
-	public function content_wrap_start() {
-
-		include Mapple_get_template( 'mapple-content-wrap-start' );
-
-	} // content_wrap_start()
-
-	/**
-	 * Returns an array of the featured image details
-	 *
-	 * @param 	int 	$postID 		The post ID
-	 * @return 	array 					Array of info about the featured image
-	 */
-	public function get_featured_images( $postID ) {
-
-		if ( empty( $postID ) ) { return FALSE; }
-
-		$imageID = get_post_thumbnail_id( $postID );
-
-		if ( empty( $imageID ) ) { return FALSE; }
-
-		return wp_prepare_attachment_for_js( $imageID );
-
-	} // get_featured_images()
 
 	/**
 	 * Includes the list wrap end template file
 	 *
 	 * @hooked 		mapple-after-loop 		10
 	 */
-	public function list_wrap_end() {
+	public function client_table_end() {
 
-		include Mapple_get_template( 'mapple-list-wrap-end' );
+		include Mapple_get_template( 'mapple-client-table-end' );
 
 	} // list_wrap_end()
 
@@ -187,11 +102,29 @@ class Mapple_Template_Functions {
 	 *
 	 * @hooked 		mapple-before-loop 		10
 	 */
-	public function list_wrap_start() {
+	public function client_table_start() {
 
-		include Mapple_get_template( 'mapple-list-wrap-start' );
+		include Mapple_get_template( 'mapple-client-table-start' );
 
 	} // list_wrap_start()
+
+    /**
+     * Returns an array of the featured image details
+     *
+     * @param 	int 	$postID 		The post ID
+     * @return 	array 					Array of info about the featured image
+     */
+    public function get_featured_images( $postID ) {
+
+        if ( empty( $postID ) ) { return FALSE; }
+
+        $imageID = get_post_thumbnail_id( $postID );
+
+        if ( empty( $imageID ) ) { return FALSE; }
+
+        return wp_prepare_attachment_for_js( $imageID );
+
+    } // get_featured_images()
 
 	/**
 	 * Includes the single client post content

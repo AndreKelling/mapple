@@ -238,14 +238,9 @@ class Mapple {
 		$plugin_templates = new Mapple_Template_Functions( $this->get_plugin_name(), $this->get_version() );
 
 		// Loop
-		$this->loader->add_action( 'mapple-before-loop', $plugin_templates, 'list_wrap_start', 10 );
-		$this->loader->add_action( 'mapple-before-loop-content', $plugin_templates, 'content_wrap_start', 10, 2 );
-		$this->loader->add_action( 'mapple-before-loop-content', $plugin_templates, 'content_link_start', 15, 2 );
-		$this->loader->add_action( 'mapple-loop-content', $plugin_templates, 'content_client_title', 10, 2 );
-		$this->loader->add_action( 'mapple-loop-content', $plugin_templates, 'content_client_location', 15, 2 );
-		$this->loader->add_action( 'mapple-after-loop-content', $plugin_templates, 'content_link_end', 10, 2 );
-		$this->loader->add_action( 'mapple-after-loop-content', $plugin_templates, 'content_wrap_end', 90, 2 );
-		$this->loader->add_action( 'mapple-after-loop', $plugin_templates, 'list_wrap_end', 10 );
+		$this->loader->add_action( 'mapple-before-loop', $plugin_templates, 'client_table_start', 10 );
+		$this->loader->add_action( 'mapple-loop-content', $plugin_templates, 'content_client_content', 10, 2 );
+		$this->loader->add_action( 'mapple-after-loop', $plugin_templates, 'client_table_end', 10 );
 
 		// Single
 		$this->loader->add_action( 'mapple-single-content', $plugin_templates, 'single_post_title', 10 );

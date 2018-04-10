@@ -163,7 +163,7 @@ class Mapple_Public {
 
 		$defaults['loop-template'] 	= $this->plugin_name . '-loop-clients';
 		$defaults['order'] 			= 'date';
-		$defaults['quantity'] 		= 100;
+		$defaults['quantity'] 		= 999;
 		$args						= shortcode_atts( $defaults, $atts, 'mapple' );
 		$shared 					= new Mapple_Shared( $this->plugin_name, $this->version );
 		$items 						= $shared->get_clients( $args );
