@@ -78,19 +78,32 @@ table td {
 }
 
 /* Sort table */
-.mapple__sort-table-arrows {float:right; transition:.3s ease;}
+
+.mapple__sort {
+	box-sizing: border-box;
+}
+
+.mapple__sort:before {
+	content: '';
+	display: inline-block;
+	height: 0.45em;
+	width: 0.45em;
+	border-style: solid;
+	border-width: 0.1em 0.1em 0 0;
+	transform: rotate(-45deg);
+	vertical-align: middle;
+}
+
+.mapple__sort[data-mapple-sort-asc]:before {
+	border-width: 0 0 0.1em 0.1em;
+}
+
 
 
 .sort-table th.title, .sort-table th.composer {width:20% !important;}
 .sort-table th.lyrics, .sort-table th.arranger, .sort-table th.set, .sort-table th.info {width:15% !important;}
 .sort-table .title {font-weight: bold;}
-.sort-table .title small {font-weight:normal;}
 
-@media (max-width:1024px) {
-	.sort-table th,.mapple__sort-table-arrows {text-align:center;}
-	.mapple__sort-table-arrows {float:none; padding:8px 0 0; position:relative; right:0px;}
-	.mapple__sort-table-arrows button {bottom:0;}
-}
 @media (max-width:767px) {
 	.sort-table thead tr {border-bottom:none; display:block; margin:10px 0; text-align:center;}
 	.sort-table thead tr th.arranger {display:none;}

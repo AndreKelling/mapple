@@ -109,13 +109,14 @@ class Mapple_Shared {
 		$args = array();
 
 		$args['no_found_rows']			= true;
-		$args['orderby'] 				= $params['order'];
+		$args['orderby'] 				= $params['orderby'];
+        $args['order']                  = 'ASC';
 		$args['posts_per_page'] 		= absint( $params['quantity'] );
 		$args['post_status'] 			= 'publish';
 		$args['post_type'] 				= 'clients';
 		$args['update_post_term_cache'] = false;
 
-		unset( $params['order'] );
+		unset( $params['orderby'] );
 		unset( $params['quantity'] );
 		unset( $params['listview'] );
 		unset( $params['singleview'] );

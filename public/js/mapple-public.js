@@ -85,15 +85,55 @@ const Mapple = function() {
 
     plugin.loadJSON = function(callback) {
         const xobj = new XMLHttpRequest();
-        xobj.overrideMimeType("application/json");
+        xobj.overrideMimeType('application/json');
         xobj.open('GET', '/wp-json/wp/v2/clients', true); // Replace 'my_data' with the path to your file
         xobj.onreadystatechange = function () {
-            if (xobj.readyState == 4 && xobj.status == "200") {
+            if (xobj.readyState == 4 && xobj.status == '200') {
                 // Required use of an anonymous callback as .open will NOT return a value but simply returns undefined in asynchronous mode
                 callback(xobj.responseText);
             }
         };
         xobj.send(null);
+    };
+    
+    plugin.sortableTable = function (el) {
+        const tbody = el.getElementsByTagName('tbody')[0];
+        const rows = tbody.getElementsByTagName('tr');
+        const sortButtons = el.querySelectorAll('[data-mapple-sort]');
+
+        sortButtons.forEach(function (el) {
+            const sortBy = el.getAttribute('data-mapple-sort');
+
+            el.addEventListener('click', function() {
+                const ascending = el.hasAttribute('data-mapple-sort-asc');
+                let unsorted = true;
+
+                console.log(ascending);
+                ascending ? el.removeAttribute('data-mapple-sort-asc') : el.setAttribute('data-mapple-sort-asc', '');
+
+                while (unsorted) {
+                    console.log('sort while');
+                    unsorted = false;
+                    for (let i = 0; i < rows.length - 1; i++) {
+                        const row = rows[i];
+                        const nextRow = rows[i + 1];
+                        let value = row.getElementsByClassName(sortBy)[0].innerHTML;
+                        let nextValue = nextRow.getElementsByClassName(sortBy)[0].innerHTML;
+                        value = value.replace(',', ''); // in case a comma is used in float number
+                        nextValue = nextValue.replace(',', '');
+                        if (!isNaN(value)) {
+                            value = parseFloat(value);
+                            nextValue = parseFloat(nextValue);
+                        }
+                        if (ascending ? value < nextValue : value > nextValue) {
+                            tbody.insertBefore(nextRow, row);
+                            unsorted = true;
+                        }
+                    }
+                }
+            });
+        })
+
     };
 
     return {
@@ -102,29 +142,3 @@ const Mapple = function() {
 };
 
 Mapple().init();
-
-function sort(ascending, columnClassName, tableId) {
-    var tbody = document.getElementById(tableId).getElementsByTagName(
-        "tbody")[0];
-    var rows = tbody.getElementsByTagName("tr");
-    var unsorted = true;
-    while (unsorted) {
-        unsorted = false;
-        for (var r = 0; r < rows.length - 1; r++) {
-            var row = rows[r];
-            var nextRow = rows[r + 1];
-            var value = row.getElementsByClassName(columnClassName)[0].innerHTML;
-            var nextValue = nextRow.getElementsByClassName(columnClassName)[0].innerHTML;
-            value = value.replace(',', ''); // in case a comma is used in float number
-            nextValue = nextValue.replace(',', '');
-            if (!isNaN(value)) {
-                value = parseFloat(value);
-                nextValue = parseFloat(nextValue);
-            }
-            if (ascending ? value > nextValue : value < nextValue) {
-                tbody.insertBefore(nextRow, row);
-                unsorted = true;
-            }
-        }
-    }
-}
