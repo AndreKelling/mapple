@@ -59,10 +59,8 @@ class Mapple_Globals {
 	 */
  	public static function get_template( $name ) {
 
- 		$template = '';
-
-		$locations[] = "{$name}.php";
-		$locations[] = "/templates/{$name}.php";
+		$locations[] = "mapple/admin/partials/{$name}.php";
+		$locations[] = "mapple/public/templates/{$name}.php";
 
 		/**
 		 * Filter the locations to search for a template file
@@ -71,12 +69,12 @@ class Mapple_Globals {
 		 */
 		apply_filters( 'mapple-template-paths', $locations );
 
-		$template = locate_template( $locations, TRUE );
+		$template = locate_template( $locations, FALSE );
 
 		if ( empty( $template ) ) {
 
 			$template = plugin_dir_path( dirname( __FILE__ ) ) . 'public/templates/' . $name . '.php';
-
+			
 		}
 
 		return $template;
