@@ -58,8 +58,7 @@ class Mapple_Globals {
 	 * @return 	string 						The path to the template
 	 */
  	public static function get_template( $name ) {
-
-		$locations[] = "mapple/admin/partials/{$name}.php";
+ 	    
 		$locations[] = "mapple/public/templates/{$name}.php";
 
 		/**
@@ -74,7 +73,7 @@ class Mapple_Globals {
 		if ( empty( $template ) ) {
 
 			$template = plugin_dir_path( dirname( __FILE__ ) ) . 'public/templates/' . $name . '.php';
-			
+
 		}
 
 		return $template;
