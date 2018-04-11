@@ -5,7 +5,7 @@
  *
  * Enter text below to appear below the section title on the Settings page
  *
- * @link       http://slushman.com
+ * @link       https://andrekelling.de
  * @since      1.0.0
  *
  * @package    Mapple

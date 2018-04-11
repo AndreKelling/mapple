@@ -4,7 +4,7 @@
  * Provides the markup for a text with address autocompletion field
  * works if google API key is already filled in settings
  *
- * @link 		http://example.com
+ * @link 		https://andrekelling.de
  * @since 		1.0.0
  *
  * @package 	Mapple

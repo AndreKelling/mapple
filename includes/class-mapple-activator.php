@@ -3,7 +3,7 @@
 /**
  * Fired during plugin activation
  *
- * @link       http://example.com
+ * @link       https://andrekelling.de
  * @since      1.0.0
  *
  * @package    Mapple

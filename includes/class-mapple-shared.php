@@ -3,7 +3,7 @@
 /**
  * The public & admin-facing shared functionality of the plugin.
  *
- * @link 		http://slushman.com
+ * @link 		https://andrekelling.de
  * @since 		1.0.0
  *
  * @package 	Mapple

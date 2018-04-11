@@ -8,13 +8,13 @@
  * registers the activation and deactivation functions, and defines a function
  * that starts the plugin.
  *
- * @link              http://example.com
+ * @link              https://andrekelling.de
  * @since             1.0.0
  * @package           Mapple
  *
  * @wordpress-plugin
  * Plugin Name:       Mapple
- * Plugin URI:        http://example.com/mapple-uri/
+ * Plugin URI:        https://andrekelling.de/mapple-uri/
  * Description:       This is a short description of what the plugin does. It's displayed in the WordPress admin area.
  * Version:           1.0.0
  * Author:            André Kelling
