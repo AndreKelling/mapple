@@ -113,11 +113,9 @@ const Mapple = function() {
                 const ascending = el.hasAttribute('data-mapple-sort-asc');
                 let unsorted = true;
 
-                console.log(ascending);
                 ascending ? el.removeAttribute('data-mapple-sort-asc') : el.setAttribute('data-mapple-sort-asc', '');
 
                 while (unsorted) {
-                    console.log('sort while');
                     unsorted = false;
                     for (let i = 0; i < rows.length - 1; i++) {
                         const row = rows[i];
