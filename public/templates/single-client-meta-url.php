@@ -4,7 +4,7 @@
  */
 
 if ( ! empty( $meta['client-url'][0] ) ) { ?>
-	<p class="<?php echo esc_attr( 'client-url' ); ?>">
+	<p class="mapple__client-url">
 		<?php
 		if ( ! empty( $meta['client-urlname'][0] ) ) {
 			$urlName = $meta['client-urlname'][0];
