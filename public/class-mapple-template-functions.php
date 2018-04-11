@@ -137,6 +137,19 @@ class Mapple_Template_Functions {
 
 	} // single_post_content()
 
+    /**
+     * Includes the single client post metadata for address
+     *
+     * @hooked 		mapple-single-content 	22
+     *
+     * @param 		array 		$meta 		The post metadata
+     */
+    public function single_post_address( $meta ) {
+
+        include Mapple_get_template( 'single-client-meta-address' );
+
+    } // single_post_address()
+
 	/**
 	 * Includes the single client post metadata for location
 	 *

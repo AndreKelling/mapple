@@ -5,11 +5,11 @@
         </a>
     </td>
     <td data-label="<?php echo __( 'Address', 'mapple' ) ?>" class="mapple__sort--address">
-        <?php  if ( ! empty( $meta['client-location'][0] ) ) {
+        <?php  if ( ! empty( $meta['client-address'][0] ) ) {
 
             ?>
 
-            <?php echo esc_html( $meta['client-location'][0] ); ?>
+            <?php echo esc_html( $meta['client-address'][0] ); ?>
             <?php
         }
         ?>

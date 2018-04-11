@@ -47,7 +47,7 @@ const Mapple = function() {
     };
 
     plugin.setMarker = function(client, i, theMap) {
-    	const clientTitle = client.title.rendered;
+        const clientTitle = client.title.rendered;
         // strip out all white spaces
         let geolocation = client.location.replace(/\s/g,'');
         geolocation = geolocation.split(',')
@@ -69,6 +69,11 @@ const Mapple = function() {
 
             const clientLink = '<br><a href="' + client.url + '" target="_blank">' + clientUrlName + '</a>';
             infowindowContent = infowindowContent + clientLink;
+        }
+
+        if (client.address){
+            const clientAddress = '<br>' + client.address;
+            infowindowContent = infowindowContent + clientAddress;
         }
 
         infowindowContent = '<p>' + infowindowContent + '</p>';

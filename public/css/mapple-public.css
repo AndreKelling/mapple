@@ -7,24 +7,23 @@
 
 /* basic table */
 
-table thead tr {
+.mapple__table thead tr {
 	border-bottom: 2px solid #bfbfbf;
 }
 
-table thead th,
-table tfoot th {
+.mapple__table thead th {
 	text-align: left;
 	text-transform: uppercase;
 }
 
-table tbody tr:hover {
+.mapple__table tbody tr:hover {
 	background-color: #eee;
 }
 
-table th,
-table td {
-	border: 1px solid #bfbfbf;
+.mapple__table th,
+.mapple__table td {
 	padding: 10px 14px;
+	border: 1px solid #bfbfbf;
 	position: relative;
 	vertical-align: middle;
 }
@@ -32,7 +31,7 @@ table td {
 /* Responsive table */
 
 @media (max-width: 767px) {
-	table tbody tr:hover {
+	.mapple__table tbody tr:hover {
 		background-color: inherit;
 	}
 
@@ -107,4 +106,8 @@ table td {
 
 .mapple__sort--title {
 	white-space: nowrap;
+}
+
+.mapple__sort--address {
+	min-width: 248px;
 }
