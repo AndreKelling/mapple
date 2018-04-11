@@ -161,60 +161,6 @@ class Mapple_Admin {
 	} // new_cpt_clients()
 
 	/**
-	 * Creates a new taxonomy for a custom post type
-	 *
-	 * @todo: add taxonomy if needed
-	 *
-	 * @since 	1.0.0
-	 * @access 	public
-	 * @uses 	register_taxonomy()
-	 */
-	public static function new_taxonomy_type() {
-		$plural 	= 'Types';
-		$single 	= 'Type';
-		$tax_name 	= 'clients_type';
-		$opts['hierarchical']							= TRUE;
-		//$opts['meta_box_cb'] 							= '';
-		$opts['public']									= TRUE;
-		$opts['query_var']								= $tax_name;
-		$opts['show_admin_column'] 						= FALSE;
-		$opts['show_in_nav_menus']						= TRUE;
-		$opts['show_tag_cloud'] 						= TRUE;
-		$opts['show_ui']								= TRUE;
-		$opts['sort'] 									= '';
-		$opts['show_in_rest']                           = TRUE;
-  		$opts['rest_controller_class']                  = 'WP_REST_Terms_Controller';
-		//$opts['update_count_callback'] 					= '';
-		$opts['capabilities']['assign_terms'] 			= 'edit_posts';
-		$opts['capabilities']['delete_terms'] 			= 'manage_categories';
-		$opts['capabilities']['edit_terms'] 			= 'manage_categories';
-		$opts['capabilities']['manage_terms'] 			= 'manage_categories';
-		$opts['labels']['add_new_item'] 				= esc_html__( "Add New {$single}", 'mapple' );
-		$opts['labels']['add_or_remove_items'] 			= esc_html__( "Add or remove {$plural}", 'mapple' );
-		$opts['labels']['all_items'] 					= esc_html__( $plural, 'mapple' );
-		$opts['labels']['choose_from_most_used'] 		= esc_html__( "Choose from most used {$plural}", 'mapple' );
-		$opts['labels']['edit_item'] 					= esc_html__( "Edit {$single}" , 'mapple');
-		$opts['labels']['menu_name'] 					= esc_html__( $plural, 'mapple' );
-		$opts['labels']['name'] 						= esc_html__( $plural, 'mapple' );
-		$opts['labels']['new_item_name'] 				= esc_html__( "New {$single} Name", 'mapple' );
-		$opts['labels']['not_found'] 					= esc_html__( "No {$plural} Found", 'mapple' );
-		$opts['labels']['parent_item'] 					= esc_html__( "Parent {$single}", 'mapple' );
-		$opts['labels']['parent_item_colon'] 			= esc_html__( "Parent {$single}:", 'mapple' );
-		$opts['labels']['popular_items'] 				= esc_html__( "Popular {$plural}", 'mapple' );
-		$opts['labels']['search_items'] 				= esc_html__( "Search {$plural}", 'mapple' );
-		$opts['labels']['separate_items_with_commas'] 	= esc_html__( "Separate {$plural} with commas", 'mapple' );
-		$opts['labels']['singular_name'] 				= esc_html__( $single, 'mapple' );
-		$opts['labels']['update_item'] 					= esc_html__( "Update {$single}", 'mapple' );
-		$opts['labels']['view_item'] 					= esc_html__( "View {$single}", 'mapple' );
-		$opts['rewrite']['ep_mask']						= EP_NONE;
-		$opts['rewrite']['hierarchical']				= FALSE;
-		$opts['rewrite']['slug']						= esc_html__( strtolower( $tax_name ), 'mapple' );
-		$opts['rewrite']['with_front']					= FALSE;
-		$opts = apply_filters( 'mapple-taxonomy-options', $opts );
-		register_taxonomy( $tax_name, 'map', $opts );
-	} // new_taxonomy_type()
-
-	/**
 	 * Creates the options page
 	 *
 	 * @since 		1.0.0
