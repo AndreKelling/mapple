@@ -123,6 +123,7 @@ class Mapple_Admin_Metaboxes {
 
 		$fields = array();
 
+        $fields[] = array( 'client-address', 'text' );
 		$fields[] = array( 'client-location', 'text' );
 		$fields[] = array( 'client-url', 'text' );
 		$fields[] = array( 'client-urlname', 'text' );
@@ -235,15 +236,15 @@ class Mapple_Admin_Metaboxes {
 	 * Add posts meta field to rest_api callback
 	 */
 	function filter_clients_json( $data, $post ) {
+		$address = get_post_meta( $post->ID, 'client-address', true );
 		$location = get_post_meta( $post->ID, 'client-location', true );
 		$url = get_post_meta( $post->ID, 'client-url', true );
 		$urlName = get_post_meta( $post->ID, 'client-urlname', true );
 
-		if( $location ) {
-			$data->data['location'] = $location;
-			$data->data['url'] = $url;
-			$data->data['urlname'] = $urlName;
-		}
+        $data->data['address'] = $address;
+        $data->data['location'] = $location;
+        $data->data['url'] = $url;
+        $data->data['urlname'] = $urlName;
 
 		return $data;
 	}
