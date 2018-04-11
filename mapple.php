@@ -14,8 +14,8 @@
  *
  * @wordpress-plugin
  * Plugin Name:       Mapple
- * Plugin URI:        https://andrekelling.de/mapple-uri/
- * Description:       This is a short description of what the plugin does. It's displayed in the WordPress admin area.
+ * Plugin URI:        https://andrekelling.de/
+ * Description:       This Plugin is custom made and won't be updateable with click as long it's not in a Wordpress SVN repo. Check out the github repo and download manually.
  * Version:           1.0.0
  * Author:            André Kelling
  * Author URI:        https://andrekelling.de/

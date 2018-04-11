@@ -8,13 +8,16 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"PO-Revision-Date: 2018-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
+"PO-Revision-Date: 2018-04-11 10:58+0200\n"
+"Language-Team: \n"
+"X-Generator: Poedit 2.0.6\n"
+"Last-Translator: \n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Language: de\n"
 
 #: admin/class-mapple-admin-metaboxes.php:77
 msgid "Additional Client Info"
-msgstr ""
+msgstr "Zusatzinfo"
 
 #: admin/class-mapple-admin.php:84
 msgid "Mapple Settings"
@@ -35,10 +38,12 @@ msgstr ""
 #: admin/partials/mapple-admin-field-text-address.php:47
 msgid "please enter a valid google maps API key in Settings page!"
 msgstr ""
+"Fügen Sie einen validen Google Maps API key in der Settings Sektion ein!"
 
 #: admin/partials/mapple-admin-field-text-address.php:48
 msgid "this address field works with google maps autocomplete functionality"
 msgstr ""
+"Dieses Adress-feld arbeitet mit der Google Maps Autocomplete Funktionalität"
 
 #: includes/class-mapple-sanitize.php:190
 msgid "Specify the data type to sanitize."
@@ -50,29 +55,30 @@ msgstr ""
 
 #: public/class-mapple-public.php:103
 msgid "Please wait..."
-msgstr ""
+msgstr "Bitte warten...."
 
 #: public/templates/mapple-client-content.php:3
 msgid "to client detailpage"
-msgstr ""
+msgstr "zur Detailsseite"
 
 #: public/templates/mapple-client-content.php:7
 #: public/templates/mapple-client-table-start.php:9
 msgid "Address"
-msgstr ""
+msgstr "Adresse"
 
 #: public/templates/mapple-client-content.php:17
 #: public/templates/mapple-client-table-start.php:12
 msgid "Description"
-msgstr ""
+msgstr "Beschreibung"
 
 #: public/templates/mapple-client-table-start.php:5
 msgid "sort"
-msgstr ""
+msgstr "sortieren"
 
 #: public/templates/mapple-client-table-start.php:6
 msgid "Title"
-msgstr ""
+msgstr "Name"
+
 #. Plugin Name of the plugin/theme
 msgid "Mapple"
 msgstr ""
@@ -82,7 +88,9 @@ msgid "https://andrekelling.de/mapple-uri/"
 msgstr ""
 
 #. Description of the plugin/theme
-msgid "This Plugin is custom made and won't be updateable with click as long it's not in a Wordpress SVN repo. Check out the github repo and download manually."
+msgid ""
+"This is a short description of what the plugin does. It's displayed in the "
+"WordPress admin area."
 msgstr ""
 
 #. Author of the plugin/theme
