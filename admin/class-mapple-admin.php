@@ -291,7 +291,7 @@ class Mapple_Admin {
 		if ( empty( $data ) ) { return; }
 
 		$return 	= '';
-		$sanitizer 	= new Now_Hiring_Sanitize();
+		$sanitizer 	= new Mapple_Sanitize();
 
 		$sanitizer->set_data( $data );
 		$sanitizer->set_type( $type );

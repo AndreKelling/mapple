@@ -14,7 +14,7 @@ $meta = get_post_custom( $post->ID );
  */
 do_action( 'mapple-before-single', $meta );
 
-?><div class="wrap-client"><?php
+?><div class="wrap"><?php
 
 	/**
 	 * mapple-before-single-content hook

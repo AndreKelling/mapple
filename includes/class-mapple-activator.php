@@ -30,7 +30,11 @@ class Mapple_Activator {
 	 * @since    1.0.0
 	 */
 	public static function activate() {
+	    require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-mapple-admin.php';
 
+        Mapple_Admin::new_cpt_clients();
+
+        flush_rewrite_rules(false);
 	}
 
 }
