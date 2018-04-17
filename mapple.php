@@ -15,10 +15,10 @@
  * @wordpress-plugin
  * Plugin Name:       Mapple
  * Plugin URI:        https://andrekelling.de/
- * Description:       This Plugin is custom made and won't be updateable with click as long it's not in a Wordpress SVN repo. Check out the github repo and download manually.
+ * Description:       To show a google map with the locations of your clients. You can output additionally a sorted listing table of all your clients. Just with shortcodes.
  * Version:           1.0.0
  * Author:            André Kelling
- * Author URI:        https://andrekelling.de/
+ * Author URI:        https://andrekelling.de/about
  * License:           GPL-2.0+
  * License URI:       http://www.gnu.org/licenses/gpl-2.0.txt
  * Text Domain:       mapple
