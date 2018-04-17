@@ -71,3 +71,6 @@
         clients
     </code>
 </p>
+
+<h4>Remove Plugin and Data</h4>
+<p><?php echo __( 'If you are going to remove the plugin. You can clean up the database by removing all `client` posts and all `client-*` posts meta data created by this plugin.', 'mapple' ); ?></p>

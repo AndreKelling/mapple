@@ -116,29 +116,6 @@ class Mapple_Public {
 	}
 
 	/**
-	 * Adds a default single view template for a job opening
-	 *
-	 * @param 	string 		$template 		The name of the template
-	 * @return 	mixed 						The single template
-	 */
-	public function single_cpt_template( $template ) {
-
-		global $post;
-
-		$return = $template;
-
-		if ( $post->post_type == 'clients' ) {
-
-			$return = mapple_get_template( 'single-client' );
-
-		}
-
-		return $return;
-
-	} // single_cpt_template()
-
-
-	/**
 	 * Processes shortcode mapple_map
 	 * output just a div which will self initialise the google map
 	 *

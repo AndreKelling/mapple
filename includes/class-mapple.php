@@ -211,7 +211,6 @@ class Mapple {
 
 		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_styles' );
 		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_scripts' );
-		$this->loader->add_filter( 'single_template', $plugin_public, 'single_cpt_template' );
 		$this->loader->add_action( 'init', $plugin_public, 'register_shortcodes' );
 
 		/**
@@ -239,14 +238,6 @@ class Mapple {
 		$this->loader->add_action( 'mapple-before-loop', $plugin_templates, 'client_table_start', 10 );
 		$this->loader->add_action( 'mapple-loop-content', $plugin_templates, 'content_client_content', 10, 2 );
 		$this->loader->add_action( 'mapple-after-loop', $plugin_templates, 'client_table_end', 10 );
-
-		// Single
-		$this->loader->add_action( 'mapple-single-content', $plugin_templates, 'single_post_title', 10 );
-		$this->loader->add_action( 'mapple-single-content', $plugin_templates, 'single_post_content', 15 );
-        $this->loader->add_action( 'mapple-single-content', $plugin_templates, 'single_post_url', 20 );
-		$this->loader->add_action( 'mapple-single-content', $plugin_templates, 'single_post_address', 22 );
-		$this->loader->add_action( 'mapple-single-content', $plugin_templates, 'single_post_location', 25 );
-		$this->loader->add_action( 'mapple-single-content', $plugin_templates, 'single_post_thumbnail', 5 );
 	} // define_template_hooks()
 
 	/**
