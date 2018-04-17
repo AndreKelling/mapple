@@ -11,7 +11,7 @@ A WordPress plugin to show a client map and data table
 This plugin is for showing a list of clients. 
 You can output a google map with marker and a table as a list of all clients.
 
-![Out of Map and Table](/../screenshots/screenshots/fe-output.jpg?raw=true "Out of Map and Table on the Front End")
+![Output of Map and Table](/../screenshots/screenshots/fe-output.jpg?raw=true "Output of Map and Table on the Front End")
 
 The google map is centered to all markers added. Markers got little Infowindows with client's name, website and address
 
