@@ -3,26 +3,19 @@
     <tr>
         <th class="mapple__sort--title">
             <button class="mapple__sort" data-mapple-sort="mapple__sort--title" title="<?php echo __( 'sort', 'mapple' ) ?>" data-mapple-sort-asc></button>
-	        <?php  if ( ! empty( $atts['title-name'] ) ) {
-		        echo esc_html( $atts['title-name'] );
-	        } else {
-		        echo __( 'Title', 'mapple' );
-            } ?>
+	        <?php echo esc_html( $atts['title-name'] ); ?>
         </th>
         <th class="mapple__sort--address">
-	        <?php  if ( ! empty( $atts['title-address'] ) ) {
-		        echo esc_html( $atts['title-address'] );
-	        } else {
-		        echo __( 'Address', 'mapple' );
-            } ?>
+	        <?php echo esc_html( $atts['title-address'] ); ?>
         </th>
         <th class="mapple__sort--description">
-	        <?php  if ( ! empty( $atts['title-desc'] ) ) {
-		        echo esc_html( $atts['title-desc'] );
-	        } else {
-		        echo __( 'Description', 'mapple' );
-            } ?>
+	        <?php echo esc_html( $atts['title-desc'] ); ?>
         </th>
+	    <?php if ($atts['with-tags']) { ?>
+            <th class="mapple__sort--keywords">
+	            <?php echo esc_html( $atts['title-tags'] ); ?>
+            </th>
+	    <?php } ?>
     </tr>
     </thead>
     <tbody>

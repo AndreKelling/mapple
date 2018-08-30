@@ -30,7 +30,7 @@ foreach ( $items as $item ) {
      *
      * @hooked 		content_client_content 		10
      */
-    do_action( 'mapple-loop-content', $item, $meta );
+    do_action( 'mapple-loop-content', $item, $meta, $atts );
 
 } // foreach
 

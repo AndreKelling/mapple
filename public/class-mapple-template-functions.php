@@ -80,7 +80,7 @@ class Mapple_Template_Functions {
 	 * @param 		object 		$item 		A post object
 	 * @param 		array 		$meta 		The post metadata
 	 */
-	public function content_client_content( $item, $meta ) {
+	public function content_client_content( $item, $meta, $atts ) {
 
 		include Mapple_get_template( 'mapple-client-content' );
 

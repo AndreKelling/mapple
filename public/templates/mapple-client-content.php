@@ -4,17 +4,12 @@
             <?php echo $item->post_title; ?>
         </a>
     </td>
-    <td data-label="<?php echo __( 'Address', 'mapple' ) ?>" class="mapple__sort--address">
+    <td data-label="<?php echo esc_html( $atts['title-address'] ); ?>" class="mapple__sort--address">
         <?php  if ( ! empty( $meta['client-address'][0] ) ) {
-
-            ?>
-
-            <?php echo esc_html( $meta['client-address'][0] ); ?>
-            <?php
-        }
-        ?>
+            echo esc_html( $meta['client-address'][0] );
+        } ?>
     </td>
-    <td data-label="<?php echo __( 'Description', 'mapple' ) ?>" class="mapple__sort--description">
+    <td data-label="<?php echo esc_html( $atts['title-desc'] ); ?>" class="mapple__sort--description">
         <?php echo empty($item->post_excerpt) ? wp_trim_words($item->post_content, 33, '...') : $item->post_excerpt; ?>
 
         <?php if ( ! empty( $meta['client-url'][0] ) ) { ?>
@@ -33,4 +28,17 @@
             </p>
         <?php } ?>
     </td>
+    <?php if ($atts['with-tags']) { ?>
+        <td data-label="<?php echo esc_html( $atts['title-tags'] ); ?>" class="mapple__sort--keywords">
+            <?php
+            $post_tags = get_the_terms( $item->ID, 'post_tag');
+
+            if ( $post_tags ) {
+	            foreach( $post_tags as $tag ) {
+		            echo $tag->name . ' ';
+	            }
+            }
+            ?>
+        </td>
+    <?php } ?>
 </tr>
