@@ -7,14 +7,26 @@ const Mapple = function() {
     const settings = {
         bounds: new google.maps.LatLngBounds(),
         infowindow: new google.maps.InfoWindow(),
-        tableSelectorClass: '.mapple__table',
+        tableSelector: document.querySelectorAll('.mapple__table')[0],
         tableTagsSelectorClass: '.mapple__tags',
+        tableRows: []
     };
 
     plugin.init = function() {
+        plugin.prepareTableRows();
+
         document.querySelectorAll('[data-mapple]').forEach(function (el) {
             plugin[el.dataset.mapple](el);
         })
+    };
+
+    plugin.prepareTableRows = function() {
+        const tbody = settings.tableSelector.getElementsByTagName('tbody')[0];
+        const rows = tbody.querySelectorAll('tr');
+
+        [].forEach.call(rows, (el) => {
+            settings.tableRows.push(el.dataset.mappleId);
+        });
     };
 
     plugin.initMap = function(el) {
@@ -155,10 +167,9 @@ const Mapple = function() {
     };
 
     plugin.handleTagFilter = function (el) {
-        const table = document.querySelectorAll(settings.tableSelectorClass)[0];
-        const tbody = table.getElementsByTagName('tbody')[0];
+        const tbody = settings.tableSelector.getElementsByTagName('tbody')[0];
         const rows = tbody.getElementsByTagName('tr');
-        const rowsTagColumn = table.querySelectorAll(settings.tableTagsSelectorClass);
+        const rowsTagColumn = settings.tableSelector.querySelectorAll(settings.tableTagsSelectorClass);
 
         const text = el.innerText;
         const pat = new RegExp(text, 'i');
@@ -171,8 +182,7 @@ const Mapple = function() {
     };
 
     plugin.searchTable = function (el) {
-        const table = document.querySelectorAll(settings.tableSelectorClass)[0];
-        const tbody = table.getElementsByTagName('tbody')[0];
+        const tbody = settings.tableSelector.getElementsByTagName('tbody')[0];
         const rows = tbody.getElementsByTagName('tr');
 
         el.addEventListener('keyup', function(e) {
@@ -186,12 +196,12 @@ const Mapple = function() {
         });
     };
 
-    plugin.displayResultHandler = function (el, visible) {
-        console.log(el);
+    plugin.displayResultHandler = function (row, visible) {
+console.log(settings.tableRows);
         if (visible) {
-            el.style.display = '';
+            row.style.display = '';
         } else {
-            el.style.display = 'none';
+            row.style.display = 'none';
         }
     };
 

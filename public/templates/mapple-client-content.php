@@ -1,6 +1,7 @@
-<tr>
+<?php $id = $item->ID; ?>
+<tr data-mapple-id="<?php echo $id; ?>">
     <td class="mapple__sort--title">
-        <a href="<?php echo esc_url( get_permalink( $item->ID ) ); ?>" title="<?php echo __( 'to client detailpage', 'mapple' ) ?>">
+        <a href="<?php echo esc_url( get_permalink( $id ) ); ?>" title="<?php echo __( 'to client detailpage', 'mapple' ) ?>">
             <?php echo $item->post_title; ?>
         </a>
     </td>
@@ -31,7 +32,7 @@
     <?php if (! empty ($atts['with-tags'])) { ?>
         <td data-label="<?php echo esc_html( $atts['title-tags'] ); ?>" class="mapple__tags mapple__sort--keywords">
             <?php
-            $post_tags = get_the_terms( $item->ID, 'post_tag');
+            $post_tags = get_the_terms( $id, 'post_tag');
 
             if ( $post_tags ) {
 	            foreach( $post_tags as $tag ) {
