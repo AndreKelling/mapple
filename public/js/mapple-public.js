@@ -20,15 +20,6 @@ const Mapple = function() {
         })
     };
 
-    plugin.prepareTableRows = function() {
-        const tbody = settings.tableSelector.getElementsByTagName('tbody')[0];
-        const rows = tbody.querySelectorAll('tr');
-
-        [].forEach.call(rows, (el) => {
-            settings.tableRows[el.dataset.mappleId] = true;
-        });
-    };
-
     plugin.initMap = function(el) {
         const myMapOptions = {
             //zoom: 11, not needed as automatically adjusted by extendBounds
@@ -177,7 +168,7 @@ const Mapple = function() {
             const item = rows[i];
             const itemTags = rowsTagColumn[i];
 
-            plugin.displayResultHandler(item, pat.test(itemTags.innerText));
+            plugin.displayResultHandler(item, pat.test(itemTags.innerText), 't');
         }
     };
 
@@ -191,14 +182,25 @@ const Mapple = function() {
             for (let i = 0; i < rows.length; i++) {
                 const item = rows[i];
 
-                plugin.displayResultHandler(item, pat.test(item.innerText));
+                plugin.displayResultHandler(item, pat.test(item.innerText), 's');
             }
         });
     };
+    
+    plugin.prepareTableRows = function() {
+        const tbody = settings.tableSelector.getElementsByTagName('tbody')[0];
+        const rows = tbody.querySelectorAll('tr');
 
-    plugin.displayResultHandler = function (row, visible) {
-console.log(settings.tableRows);
-        if (visible) {
+        [].forEach.call(rows, (el) => {
+            settings.tableRows[el.dataset.mappleId] = {'s' : true, 't' : true};
+        });
+    };
+
+    plugin.displayResultHandler = function (row, visible, type) {
+        const id = row.dataset.mappleId;
+        settings.tableRows[id][type] = visible;
+
+        if (settings.tableRows[id]['s'] === true && settings.tableRows[id]['t'] === true) {
             row.style.display = '';
         } else {
             row.style.display = 'none';
