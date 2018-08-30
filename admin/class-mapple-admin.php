@@ -121,7 +121,7 @@ class Mapple_Admin {
 		$opts['show_in_nav_menu']						= TRUE;
 		$opts['show_ui']								= TRUE;
 		$opts['supports']								= array( 'title', 'editor', 'excerpt', 'thumbnail' );
-		$opts['taxonomies']								= array();
+		$opts['taxonomies']								= array('post_tag');
 		$opts['show_in_rest']                           = TRUE;
   		$opts['rest_controller_class']                  = 'WP_REST_Posts_Controller';
 		$opts['capabilities']['delete_others_posts']	= "delete_others_{$cap_type}s";
