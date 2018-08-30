@@ -16,7 +16,7 @@
  * Plugin Name:       Mapple
  * Plugin URI:        https://andrekelling.de/
  * Description:       To show a google map with the locations of your clients. You can output additionally a sorted listing table of all your clients. Just with shortcodes.
- * Version:           1.0.0
+ * Version:           1.1.0
  * Author:            André Kelling
  * Author URI:        https://andrekelling.de/about
  * License:           GPL-2.0+
