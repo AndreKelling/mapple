@@ -113,6 +113,7 @@
 }
 
 /* Search and Filter table */
-.mapple-tags .active {
-	background: yellow;
+
+.mapple__search__tags .active {
+	background: thistle;
 }

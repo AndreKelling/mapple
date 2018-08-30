@@ -156,7 +156,7 @@ const Mapple = function() {
     // <><>><><<>><<><><><>><><><><><><>
 
     plugin.tagFilter = function (el) {
-        const buttons = el.getElementsByTagName('span');
+        const buttons = el.getElementsByTagName('button');
 
         [].forEach.call(buttons, (el) => {
             el.addEventListener('touchstart', () => {
