@@ -111,3 +111,8 @@
 .mapple__sort--address {
 	min-width: 248px;
 }
+
+/* Search and Filter table */
+.mapple-tags .active {
+	background: yellow;
+}

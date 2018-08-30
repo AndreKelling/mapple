@@ -8,7 +8,7 @@ const Mapple = function() {
         bounds: new google.maps.LatLngBounds(),
         infowindow: new google.maps.InfoWindow(),
         tableSelector: document.querySelectorAll('.mapple__table')[0],
-        tableTagsSelectorClass: '.mapple__tags',
+        tableTagsSelectorClass: 'mapple__tags',
         tableRows: {}
     };
 
@@ -111,7 +111,7 @@ const Mapple = function() {
     };
 
     // <><>><><<>><<><><><>><><><><><><>
-    // Search and filter
+    // Sort
     // <><>><><<>><<><><><>><><><><><><>
 
     plugin.sortableTable = function (el) {
@@ -149,34 +149,50 @@ const Mapple = function() {
                 }
             });
         })
-
     };
+
+    // <><>><><<>><<><><><>><><><><><><>
+    // Search and filter
+    // <><>><><<>><<><><><>><><><><><><>
 
     plugin.tagFilter = function (el) {
         const buttons = el.getElementsByTagName('span');
 
         [].forEach.call(buttons, (el) => {
             el.addEventListener('touchstart', () => {
-                plugin.handleTagFilter(el)
+                plugin.handleTagFilter(el, buttons)
             });
             el.addEventListener('click', () => {
-                plugin.handleTagFilter(el)
+                plugin.handleTagFilter(el, buttons)
             });
         });
     };
 
-    plugin.handleTagFilter = function (el) {
+    plugin.handleTagFilter = function (button, allButtons) {
         const tbody = settings.tableSelector.getElementsByTagName('tbody')[0];
         const rows = tbody.getElementsByTagName('tr');
-        const rowsTagColumn = settings.tableSelector.querySelectorAll(settings.tableTagsSelectorClass);
-
-        const text = el.innerText;
+        const rowsTagColumn = settings.tableSelector.getElementsByClassName(settings.tableTagsSelectorClass);
+        const text = button.innerText;
         const pat = new RegExp(text, 'i');
+        let visible;
+
+        if (button.classList.contains('active')) {
+            button.classList.remove('active');
+            visible = true;
+        } else {
+            [].forEach.call(allButtons, (el) => {el.classList.remove('active')});
+            button.classList.add('active');
+        }
+
         for (let i = 0; i < rows.length; i++) {
             const item = rows[i];
             const itemTags = rowsTagColumn[i];
 
-            plugin.displayResultHandler(item, pat.test(itemTags.innerText), 't');
+            if (visible) {
+                plugin.displayResultHandler(item, true, 't');
+            } else {
+                plugin.displayResultHandler(item, pat.test(itemTags.innerText), 't');
+            }
         }
     };
 
@@ -188,9 +204,18 @@ const Mapple = function() {
             const text = e.target.value;
             const pat = new RegExp(text, 'i');
             for (let i = 0; i < rows.length; i++) {
-                const item = rows[i];
+                const row = rows[i];
+                let rowText = '';
 
-                plugin.displayResultHandler(item, pat.test(item.innerText), 's');
+                // skip tag column for text search
+                const rowContents = row.getElementsByTagName('td');
+                [].forEach.call(rowContents, (el) => {
+                    if (! el.classList.contains(settings.tableTagsSelectorClass)) {
+                        rowText += el.innerText;
+                    }
+                });
+
+                plugin.displayResultHandler(row, pat.test(rowText), 's');
             }
         });
     };
