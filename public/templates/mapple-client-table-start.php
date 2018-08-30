@@ -11,7 +11,7 @@
         <th class="mapple__sort--description">
 	        <?php echo esc_html( $atts['title-desc'] ); ?>
         </th>
-	    <?php if ($atts['with-tags']) { ?>
+	    <?php if (! empty ($atts['with-tags'])) { ?>
             <th class="mapple__sort--keywords">
 	            <?php echo esc_html( $atts['title-tags'] ); ?>
             </th>
