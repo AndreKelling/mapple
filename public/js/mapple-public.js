@@ -8,6 +8,7 @@ const Mapple = function() {
         bounds: new google.maps.LatLngBounds(),
         infowindow: new google.maps.InfoWindow(),
         tableSelectorClass: '.mapple__table',
+        tableTagsSelectorClass: '.mapple__tags',
     };
 
     plugin.init = function() {
@@ -140,6 +141,35 @@ const Mapple = function() {
 
     };
 
+    plugin.tagFilter = function (el) {
+        const buttons = el.getElementsByTagName('span');
+
+        [].forEach.call(buttons, (el) => {
+            el.addEventListener('touchstart', () => {
+                plugin.handleTagFilter(el)
+            });
+            el.addEventListener('click', () => {
+                plugin.handleTagFilter(el)
+            });
+        });
+    };
+
+    plugin.handleTagFilter = function (el) {
+        const table = document.querySelectorAll(settings.tableSelectorClass)[0];
+        const tbody = table.getElementsByTagName('tbody')[0];
+        const rows = tbody.getElementsByTagName('tr');
+        const rowsTagColumn = table.querySelectorAll(settings.tableTagsSelectorClass);
+
+        const text = el.innerText;
+        const pat = new RegExp(text, 'i');
+        for (let i = 0; i < rows.length; i++) {
+            const item = rows[i];
+            const itemTags = rowsTagColumn[i];
+
+            plugin.displayResultHandler(item, pat.test(itemTags.innerText));
+        }
+    };
+
     plugin.searchTable = function (el) {
         const table = document.querySelectorAll(settings.tableSelectorClass)[0];
         const tbody = table.getElementsByTagName('tbody')[0];
@@ -151,14 +181,18 @@ const Mapple = function() {
             for (let i = 0; i < rows.length; i++) {
                 const item = rows[i];
 
-                if (pat.test(item.innerText)) {
-                    console.log(item, item.innerText);
-                    item.style.display = '';
-                } else {
-                    item.style.display = 'none';
-                }
+                plugin.displayResultHandler(item, pat.test(item.innerText));
             }
         });
+    };
+
+    plugin.displayResultHandler = function (el, visible) {
+        console.log(el);
+        if (visible) {
+            el.style.display = '';
+        } else {
+            el.style.display = 'none';
+        }
     };
 
     return {

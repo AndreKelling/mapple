@@ -29,7 +29,7 @@
         <?php } ?>
     </td>
     <?php if (! empty ($atts['with-tags'])) { ?>
-        <td data-label="<?php echo esc_html( $atts['title-tags'] ); ?>" class="mapple__sort--keywords">
+        <td data-label="<?php echo esc_html( $atts['title-tags'] ); ?>" class="mapple__tags mapple__sort--keywords">
             <?php
             $post_tags = get_the_terms( $item->ID, 'post_tag');
 
