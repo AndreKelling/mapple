@@ -73,7 +73,7 @@ class Mapple_Template_Functions {
 	} // __construct()
 
 	/**
-	 * Includes the mapple-client-title template
+	 * Includes the mapple-client-content template
 	 *
 	 * @hooked 		mapple-loop-content 		10
 	 *
@@ -84,10 +84,10 @@ class Mapple_Template_Functions {
 
 		include Mapple_get_template( 'mapple-client-content' );
 
-	} // content_client_title()
+	} // content_client_content()
 
 	/**
-	 * Includes the list wrap end template file
+	 * Includes the table wrap end template file
 	 *
 	 * @hooked 		mapple-after-loop 		10
 	 */
@@ -95,10 +95,23 @@ class Mapple_Template_Functions {
 
 		include Mapple_get_template( 'mapple-client-table-end' );
 
-	} // list_wrap_end()
+	} // client_table_end()
 
 	/**
-	 * Includes the list wrap start template file
+	 * Includes the client search template file
+	 *
+	 * @hooked 		mapple-before-loop 		5
+	 */
+	public function client_search( $atts ) {
+
+		if (! empty($atts['with-search']) ) {
+			include Mapple_get_template( 'mapple-client-search' );
+		}
+
+	} // client_search()
+
+	/**
+	 * Includes the table wrap start template file
 	 *
 	 * @hooked 		mapple-before-loop 		10
 	 */
@@ -106,7 +119,7 @@ class Mapple_Template_Functions {
 
 		include Mapple_get_template( 'mapple-client-table-start' );
 
-	} // list_wrap_start()
+	} // client_table_start()
 
 	/**
 	 * Returns a reference to this class. Used for removing

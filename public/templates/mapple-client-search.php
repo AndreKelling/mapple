@@ -1,0 +1,1 @@
+<input data-mapple="searchTable" type="text" />

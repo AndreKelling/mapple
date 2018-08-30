@@ -6,7 +6,8 @@ const Mapple = function() {
 
     const settings = {
         bounds: new google.maps.LatLngBounds(),
-        infowindow: new google.maps.InfoWindow()
+        infowindow: new google.maps.InfoWindow(),
+        tableSelectorClass: '.mapple__table',
     };
 
     plugin.init = function() {
@@ -137,6 +138,27 @@ const Mapple = function() {
             });
         })
 
+    };
+
+    plugin.searchTable = function (el) {
+        const table = document.querySelectorAll(settings.tableSelectorClass)[0];
+        const tbody = table.getElementsByTagName('tbody')[0];
+        const rows = tbody.getElementsByTagName('tr');
+
+        el.addEventListener('keyup', function(e) {
+            const text = e.target.value;
+            const pat = new RegExp(text, 'i');
+            for (let i = 0; i < rows.length; i++) {
+                const item = rows[i];
+
+                if (pat.test(item.innerText)) {
+                    console.log(item, item.innerText);
+                    item.style.display = '';
+                } else {
+                    item.style.display = 'none';
+                }
+            }
+        });
     };
 
     return {
