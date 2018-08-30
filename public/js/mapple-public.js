@@ -9,7 +9,7 @@ const Mapple = function() {
         infowindow: new google.maps.InfoWindow(),
         tableSelector: document.querySelectorAll('.mapple__table')[0],
         tableTagsSelectorClass: '.mapple__tags',
-        tableRows: []
+        tableRows: {}
     };
 
     plugin.init = function() {
@@ -25,7 +25,7 @@ const Mapple = function() {
         const rows = tbody.querySelectorAll('tr');
 
         [].forEach.call(rows, (el) => {
-            settings.tableRows.push(el.dataset.mappleId);
+            settings.tableRows[el.dataset.mappleId] = true;
         });
     };
 
