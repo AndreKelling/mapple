@@ -138,8 +138,8 @@ class Mapple_Public {
 
 		ob_start();
 
-		$titles = ['name', 'address', 'desc', 'tags'];
-		$defautTitles = [ __( 'Title', 'mapple' ),  __( 'Address', 'mapple' ), __( 'Description', 'mapple' ), __( 'Keywords', 'mapple' )];
+		$titles = ['name', 'address', 'desc', 'tags', 'search', 'search-placeholder'];
+		$defautTitles = [ __( 'Title', 'mapple' ),  __( 'Address', 'mapple' ), __( 'Description', 'mapple' ), __( 'Keywords', 'mapple' ), __( 'Search', 'mapple' ), __( 'Start search...', 'mapple' )];
 		foreach ($titles as $key=>$value){
 			if ( empty( $atts['title-'.$value] ) ) {
 				$atts['title-'.$value] = $defautTitles[$key];
