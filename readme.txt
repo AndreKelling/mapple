@@ -47,8 +47,15 @@ all `with-` attributes activate the tags coloumn, and filter when search is also
 
 1. Output of Map and Table on the Front End. In between some text. You can place your shortcodes around.
 2. New custom clients Post Type with address autocompletion
+3. Enable search and filter section for clients in the table
 
 == Changelog ==
+
+= 1.1.0 =
+* enable tag's for custom post type "clients"
+* add optional show tag's column in clients table
+* add optional search and filter section for clients table
+* enable shortcode attributes to customise table headings
 
 = 1.0.0 =
 * Initial version
