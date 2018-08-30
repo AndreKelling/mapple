@@ -102,7 +102,7 @@ class Mapple_Template_Functions {
 	 *
 	 * @hooked 		mapple-before-loop 		10
 	 */
-	public function client_table_start() {
+	public function client_table_start( $atts ) {
 
 		include Mapple_get_template( 'mapple-client-table-start' );
 

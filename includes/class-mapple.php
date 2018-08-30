@@ -235,7 +235,7 @@ class Mapple {
 		$plugin_templates = new Mapple_Template_Functions( $this->get_plugin_name(), $this->get_version() );
 
 		// Loop
-		$this->loader->add_action( 'mapple-before-loop', $plugin_templates, 'client_table_start', 10 );
+		$this->loader->add_action( 'mapple-before-loop', $plugin_templates, 'client_table_start', 10, 1 );
 		$this->loader->add_action( 'mapple-loop-content', $plugin_templates, 'content_client_content', 10, 2 );
 		$this->loader->add_action( 'mapple-after-loop', $plugin_templates, 'client_table_end', 10 );
 	} // define_template_hooks()

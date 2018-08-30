@@ -17,7 +17,7 @@
  *
  * @hooked 		client_table_start 		10
  */
-do_action( 'mapple-before-loop' );
+do_action( 'mapple-before-loop', $atts );
 
 foreach ( $items as $item ) {
 
