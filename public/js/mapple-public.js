@@ -20,6 +20,10 @@ const Mapple = function() {
         })
     };
 
+    // <><>><><<>><<><><><>><><><><><><>
+    // Google map
+    // <><>><><<>><<><><><>><><><><><><>
+
     plugin.initMap = function(el) {
         const myMapOptions = {
             //zoom: 11, not needed as automatically adjusted by extendBounds
@@ -105,7 +109,11 @@ const Mapple = function() {
         };
         xobj.send(null);
     };
-    
+
+    // <><>><><<>><<><><><>><><><><><><>
+    // Search and filter
+    // <><>><><<>><<><><><>><><><><><><>
+
     plugin.sortableTable = function (el) {
         const tbody = el.getElementsByTagName('tbody')[0];
         const rows = tbody.getElementsByTagName('tr');
@@ -186,7 +194,7 @@ const Mapple = function() {
             }
         });
     };
-    
+
     plugin.prepareTableRows = function() {
         const tbody = settings.tableSelector.getElementsByTagName('tbody')[0];
         const rows = tbody.querySelectorAll('tr');
