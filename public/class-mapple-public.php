@@ -153,8 +153,14 @@ class Mapple_Public {
 		$defaults['loop-template'] 	= $this->plugin_name . '-loop-clients';
 		$defaults['orderby'] 		= 'title';
 		$defaults['quantity'] 		= 0;
-		$args						= shortcode_atts( $defaults, $atts, 'mapple' );
+
 		$shared 					= new Mapple_Shared( $this->plugin_name, $this->version );
+		// @todo: find a better approach to get the tags without the need calling `get_clients` a second time below
+		$clientTagNames             = $shared->get_clients_tags($defaults);
+		// @todo: find better approach to include the tagsNames in the template as via shortcode attributes var
+		$atts['clientTagNames']     = $clientTagNames;
+
+		$args						= shortcode_atts( $defaults, $atts, 'mapple' );
 		$items 						= $shared->get_clients( $args );
 
 		if ( is_array( $items ) || is_object( $items ) ) {

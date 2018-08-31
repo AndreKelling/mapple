@@ -11,15 +11,11 @@
 
     <?php if (! empty ($atts['with-tags'])) { ?>
         <div class="mapple__search__tags" data-mapple="tagFilter">
-            <?php $args = array(
-                'type' => 'clients',
-                'taxonomy' => 'post_tag'
-            );
-            $tags = get_terms($args);
-
-            foreach($tags as $tag) {
-                echo '<button>' . $tag->name.'</button>';
-            } ?>
+            <?php
+                foreach($atts['clientTagNames'] as $button) {
+	                echo '<button>'.$button.'</button>';
+                }
+            ?>
         </div>
     <?php } ?>
 </div>

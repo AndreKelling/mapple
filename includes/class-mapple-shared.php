@@ -58,7 +58,6 @@ class Mapple_Shared {
 	 * @return 	object 		A post object
 	 */
 	public function get_clients( $params, $cache = '' ) {
-
 		$return 	= '';
 		$cache_name = $this->plugin_name . '_clients_posts';
 
@@ -94,7 +93,33 @@ class Mapple_Shared {
 
 		return $return;
 
-	} // get_openings()
+	} // get_clients()
+
+	/**
+	 * Get all tags used by the custom post type "clients"
+	 * @since 		1.2.0
+	 *
+	 * @param   array   $params             just needed because of get_clients uses set_args()..
+	 * @return  array                       An array of the tag Names
+	 */
+	public function get_clients_tags ($params) {
+		$cptTagNames = array();
+
+		foreach($this->get_clients($params) as $item) {
+			$tagsPost = get_the_terms( $item->ID, 'post_tag' );
+			if ( ! empty( $tagsPost ) ) {
+				foreach ( $tagsPost as $tag ) {
+					$value = $tag->name;
+					if ( ! in_array( $value, $cptTagNames ) ) {
+						array_push( $cptTagNames, $value );
+					}
+				}
+			}
+		}
+		sort($cptTagNames);
+
+		return $cptTagNames;
+	} // get_clients_tags()
 
 	/**
 	 * Sets the args array for a WP_Query call

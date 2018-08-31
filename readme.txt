@@ -1,7 +1,7 @@
 === Mapple ===
 Contributors: andrekelling
 Donate link: https://andrekelling.de/
-Tags: google maps, client map, client table
+Tags: google maps, client cpt, shortcode, no jquery, no style
 Requires at least: 4.7
 Tested up to: 4.9.5
 Stable tag: 1.1.0
@@ -15,6 +15,8 @@ To show a google map with the locations of your clients. You can output addition
 
 This plugin is for showing your clients.
 You can output a google map with markers and a table as a list of all clients.
+You can tag clients and show a search and filter bar.
+This Plugin does not need jQuery!
 
 The google map is centered shown to all markers added. Markers got little Infowindows with client's name, website and address
 
@@ -50,6 +52,9 @@ all `with-` attributes activate the tags coloumn, and filter when search is also
 3. Enable search and filter section for clients in the table
 
 == Changelog ==
+
+= 1.2.0 =
+* fix to show just the tags used by custom post type clients and not all
 
 = 1.1.0 =
 * enable tag's for custom post type "clients"
