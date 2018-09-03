@@ -35,7 +35,7 @@
     <li><code>[mapple_clients]</code> <?php echo __( 'will create a table with all clients', 'mapple' ); ?></li>
 </ul>
 <p><?php echo __( 'There are a few possible attributes you can provide to your `mapple_clients` shortcode. Here a full example with all possible options:', 'mapple' ); ?></p>
-<code>[mapple_clients title-name="Name" title-address="Adresse" title-desc="Beschreibung" title-tags="Branche" title-search="Suche" title-search-placeholder="lostippen..." with-tags="true" with-search="true"]</code>
+<code>[mapple_clients title-name="Name" title-address="Adresse" title-desc="Beschreibung" title-tags="Branche" title-search="Suche" title-search-placeholder="lostippen..." title-filter-label="Nach Branche filtern" with-tags="true" with-search="true"]</code>
 <p><?php echo __( 'all `title-` attributes are for customising words', 'mapple' ); ?></p>
 <p><?php echo __( 'all `with-` attributes activate the tags coloumn, and filter when search is also active', 'mapple' ); ?></p>
 <h4>Templates</h4>
