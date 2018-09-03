@@ -9,13 +9,20 @@
         />
     </div>
 
-    <?php if (! empty ($atts['with-tags'])) { ?>
-        <div class="mapple__search__tags" data-mapple="tagFilter">
-            <?php
-                foreach($atts['clientTagNames'] as $button) {
-	                echo '<button>'.$button.'</button>';
-                }
-            ?>
+	<?php if (! empty ($atts['with-tags'])) { ?>
+        <div class="mapple__search__tags">
+			<?php if (! empty( $atts['title-filter-label'] ) ) { ?>
+                <label>
+					<?php echo $atts['title-filter-label']; ?>
+                </label>
+			<?php } ?>
+            <span class="mapple__search__filter" data-mapple="tagFilter">
+				<?php
+				foreach($atts['clientTagNames'] as $button) {
+					echo '<button>'.$button.'</button>';
+				}
+				?>
+            </span>
         </div>
-    <?php } ?>
+	<?php } ?>
 </div>
