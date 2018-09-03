@@ -39,13 +39,11 @@ const Mapple = function() {
 
         const theMap = new google.maps.Map(el, myMapOptions);
 
-        plugin.loadJSON(function(response) {
-            const actualJSON = JSON.parse(response);
+        plugin.loadJSON('clients', function(response) {
+            for(let i = 0; i < response.length; i++) {
 
-            for(let i = 0; i < actualJSON.length; i++) {
-
-				if (actualJSON[i].location){
-                    plugin.setMarker(actualJSON[i], i, theMap);
+				if (response[i].location){
+                    plugin.setMarker(response[i], i, theMap);
 				}
 
             }
@@ -59,7 +57,7 @@ const Mapple = function() {
         const clientTitle = client.title.rendered;
         // strip out all white spaces
         let geolocation = client.location.replace(/\s/g,'');
-        geolocation = geolocation.split(',')
+        geolocation = geolocation.split(',');
 
         const marker = new google.maps.Marker({
             position: new google.maps.LatLng(geolocation[0],geolocation[1]),
@@ -89,22 +87,30 @@ const Mapple = function() {
 
         settings.bounds.extend(marker.position);
 
-        google.maps.event.addListener(marker, 'click', (function(marker, i) {
+        google.maps.event.addListener(marker, 'click', (function() {
             return function() {
-                settings.infowindow.setContent(infowindowContent);
-                settings.infowindow.open(theMap, marker);
+                if (client.featured_media){
+                    plugin.loadJSON('media/'+client.featured_media, function(response) {
+                        const clientImage =  '<br /><img src="'+response.media_details.sizes.thumbnail.source_url+'"/>';
+                        settings.infowindow.setContent(clientImage + infowindowContent);
+                        settings.infowindow.open(theMap, marker);
+                    });
+                } else {
+                    settings.infowindow.setContent(infowindowContent);
+                    settings.infowindow.open(theMap, marker);
+                }
             }
-        })(marker, i));
+        })());
 	};
 
-    plugin.loadJSON = function(callback) {
+    plugin.loadJSON = function(path, callback) {
         const xobj = new XMLHttpRequest();
         xobj.overrideMimeType('application/json');
-        xobj.open('GET', '/wp-json/wp/v2/clients', true); // Replace 'my_data' with the path to your file
+        xobj.open('GET', '/wp-json/wp/v2/'+path, true);
         xobj.onreadystatechange = function () {
             if (xobj.readyState == 4 && xobj.status == '200') {
                 // Required use of an anonymous callback as .open will NOT return a value but simply returns undefined in asynchronous mode
-                callback(xobj.responseText);
+                callback(JSON.parse(xobj.responseText));
             }
         };
         xobj.send(null);
