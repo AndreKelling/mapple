@@ -3,10 +3,11 @@
 const Mapple = function() {
 
     const plugin = {};
-
+    
     const settings = {
         bounds: new google.maps.LatLngBounds(),
         infowindow: new google.maps.InfoWindow(),
+        mapStyle: (typeof(mapple_vars) !== 'undefined') ? mapple_vars.styleJSON : '',
         tableSelector: document.querySelectorAll('.mapple__table')[0],
         tableTagsSelectorClass: 'mapple__tags',
         tableRows: {}
@@ -34,7 +35,8 @@ const Mapple = function() {
             streetViewControl: true,
             mapTypeControl: false,
             zoomControl: true,
-            panControl: true
+            panControl: true,
+            styles: settings.mapStyle
         };
 
         const theMap = new google.maps.Map(el, myMapOptions);

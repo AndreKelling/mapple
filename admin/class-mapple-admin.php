@@ -201,6 +201,36 @@ class Mapple_Admin {
 	} // field_text()
 
 	/**
+	 * Creates a textarea field
+	 *
+	 * @param 	array 		$args 			The arguments for the field
+	 * @return 	string 						The HTML field
+	 */
+	public function field_textarea( $args ) {
+
+		$defaults['class'] 			= 'widefat';
+		$defaults['description'] 	= '';
+		$defaults['label'] 			= '';
+		$defaults['name'] 			= $this->plugin_name . '-options[' . $args['id'] . ']';
+		$defaults['placeholder'] 	= '';
+		$defaults['value'] 			= '';
+		$defaults['rows'] 			= 6;
+
+		apply_filters( $this->plugin_name . '-field-text-options-defaults', $defaults );
+
+		$atts = wp_parse_args( $args, $defaults );
+
+		if ( ! empty( $this->options[$atts['id']] ) ) {
+
+			$atts['value'] = $this->options[$atts['id']];
+
+		}
+
+		include( plugin_dir_path( __FILE__ ) . 'partials/' . $this->plugin_name . '-admin-field-textarea.php' );
+
+	} // field_textarea()
+
+	/**
 	 * Returns an array of options names, fields types, and default values
 	 *
 	 * @return 		array 			An array of options
@@ -210,6 +240,7 @@ class Mapple_Admin {
 		$options = array();
 
 		$options[] = array( 'gmap-api-key', 'text', '' );
+		$options[] = array( 'gmap-style-json', 'text', '' );
 
 		return $options;
 
@@ -229,9 +260,23 @@ class Mapple_Admin {
 			$this->plugin_name,
 			$this->plugin_name . '-api',
 			array(
-				'description' 	=> 'Enter your key and save.',
+				'description' 	=> esc_html__( 'Enter your key and save.', 'mapple' ),
 				'id' 			=> 'gmap-api-key',
 				'placeholder'   => 'tHiSwIlLbEyOuRkEyToGoOgLeMaPsApI'
+			)
+		);
+
+		add_settings_field(
+			'gmap-style-json',
+			apply_filters( $this->plugin_name . 'label-gmap-style-json', esc_html__( 'Google Maps Style JSON', 'mapple' ) ),
+			array( $this, 'field_textarea' ),
+			$this->plugin_name,
+			$this->plugin_name . '-api',
+			array(
+				'description' 	=> esc_html__( 'There is a nice tool https://mapstyle.withgoogle.com/ to create the JSON.', 'mapple' ),
+				'id' 			=> 'gmap-style-json',
+				'placeholder'   => esc_html__( 'put your JSON code inside here', 'mapple' ),
+				'rows'          => 24,
 			)
 		);
 	} // register_fields()

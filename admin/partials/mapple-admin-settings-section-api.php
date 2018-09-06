@@ -12,4 +12,4 @@
  * @subpackage Mapple/admin/partials
  */
 
-?><p></p>
+// nothing to add here

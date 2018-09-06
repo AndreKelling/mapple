@@ -98,21 +98,20 @@ class Mapple_Public {
 
 		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/mapple-public.js', array($this->plugin_name.'gmaps'), $this->version, true );
 
-		$dataToBePassed = array(
-			'home'            => get_stylesheet_directory_uri(),
-			'pleaseWaitLabel' => __( 'Please wait...', 'default' )
-		);
-		wp_localize_script( $this->plugin_name, 'php_vars', $dataToBePassed );
-
-
 		$options 	= get_option( $this->plugin_name . '-options' );
 		$apiKey 	= $options['gmap-api-key'];
+		$styleJSON 	= $options['gmap-style-json'];
 
 		if(! empty($apiKey)){
 			wp_enqueue_script($this->plugin_name.'gmaps' , 'https://maps.googleapis.com/maps/api/js?key='.$apiKey, '', $this->version, true );
+
+			if(! empty($styleJSON)){
+				$dataToBePassed = array(
+					'styleJSON'            => json_decode($styleJSON)
+				);
+				wp_localize_script( $this->plugin_name, 'mapple_vars', $dataToBePassed );
+			}
 		}
-
-
 	}
 
 	/**
