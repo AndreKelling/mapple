@@ -4,7 +4,7 @@ Donate link: https://andrekelling.de/
 Tags: google maps, client cpt, shortcode, no jquery, no style
 Requires at least: 4.7
 Tested up to: 4.9.5
-Stable tag: 1.3.0
+Stable tag: 1.4.0
 Requires PHP: 7.0
 License: GPLv3.0 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
@@ -18,7 +18,8 @@ You can output a google map with markers and a table as a list of all clients.
 You can tag clients and show a search and filter bar.
 This Plugin does not need jQuery!
 
-The google map is centered shown to all markers added. Markers got little Infowindows with client's name, website and address
+The google map is centered shown to all markers added. Markers got little Infowindows with client's name, website and address.
+Map Style customisation is possible.
 
 A few notes about technical things:
 
@@ -51,10 +52,15 @@ all `with-` attributes activate the tags coloumn, and filter when search is also
 == Screenshots ==
 
 1. Output of Map and Table on the Front End. In between some text. You can place your shortcodes around.
-2. New custom clients Post Type with address autocompletion
-3. Enable search and filter section for clients in the table
+2. custom styled Map with open infowindow
+3. New custom clients Post Type with address autocompletion
+4. Enable search and filter section for clients in the table
 
 == Changelog ==
+
+= 1.4.0 =
+* enable google maps style customisation
+* remove unused `php_vars` from wp_localize_script
 
 = 1.3.0 =
 * enable shortcode attribute `title-filter-label` to customise tag filter label
