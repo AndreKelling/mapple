@@ -14,8 +14,6 @@ const Mapple = function() {
     };
 
     plugin.init = function() {
-        plugin.prepareTableRows();
-
         document.querySelectorAll('[data-mapple]').forEach(function (el) {
             plugin[el.dataset.mapple](el);
         })
@@ -126,6 +124,8 @@ const Mapple = function() {
         const tbody = el.getElementsByTagName('tbody')[0];
         const rows = tbody.getElementsByTagName('tr');
         const sortButtons = el.querySelectorAll('[data-mapple-sort]');
+
+        plugin.prepareTableRows();
 
         sortButtons.forEach(function (el) {
             const sortBy = el.getAttribute('data-mapple-sort');

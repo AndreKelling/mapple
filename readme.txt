@@ -58,6 +58,9 @@ all `with-` attributes activate the tags coloumn, and filter when search is also
 
 == Changelog ==
 
+= 1.4.1 =
+* fix JS error appearing on pages without mapple_clients table output
+
 = 1.4.0 =
 * enable google maps style customisation
 * remove unused `php_vars` from wp_localize_script
