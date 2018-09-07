@@ -24,15 +24,19 @@ if ( ! empty( $atts['label'] ) ) { ?>
 />
 
 <p>
-	<?php if ( ! empty( $atts['value'] ) ) { ?>
-        <img id="<?php echo esc_attr( $atts['id'] ); ?>-img" src="<?php echo esc_attr( $atts['value'] ); ?>" />
-    <?php } ?>
-
     <button class="button-primary" data-mappleupload="<?php echo esc_attr( $atts['id'] ); ?>">
 		<?php echo esc_html_e( 'Open Media Library', 'mapple' ) ?>
     </button>
-
 	<?php if ( ! empty( $atts['description'] ) ) { ?>
         <span class="description"><?php esc_html_e( $atts['description'], 'mapple' ); ?></span>
     <?php } ?>
 </p>
+
+<?php if ( ! empty( $atts['value'] ) ) { ?>
+    <p>
+        <img id="<?php echo esc_attr( $atts['id'] ); ?>-img" src="<?php echo esc_attr( $atts['value'] ); ?>" />
+        <button class="button-secondary" data-mappleuploadremove="<?php echo esc_attr( $atts['id'] ); ?>">
+		    <?php echo esc_html_e( 'Remove Image', 'mapple' ) ?>
+        </button>
+    </p>
+<?php }

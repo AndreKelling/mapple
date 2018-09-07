@@ -329,7 +329,8 @@ class Mapple_Admin {
 			$this->plugin_name,
 			$this->plugin_name . '-api',
 			array(
-				'description' 	=> esc_html__( 'Upload Image or paste in URL', 'mapple' ), // @todo add size info
+				'label'         => esc_html__( 'Upload Image or paste in URL', 'mapple' ),
+				'description' 	=> esc_html__( 'Your marker should not bigger then 100px width and height!', 'mapple' ),
 				'id' 			=> 'gmap-marker-image',
 				'placeholder'   => esc_html__( 'image path here...', 'mapple' ),
 			)

@@ -8,6 +8,7 @@ const Mapple = function() {
         bounds: new google.maps.LatLngBounds(),
         infowindow: new google.maps.InfoWindow(),
         mapStyle: (typeof(mapple_vars) !== 'undefined') ? mapple_vars.styleJSON : '',
+        markerImage: (typeof(mapple_vars) !== 'undefined') ? mapple_vars.markerImage : '',
         tableSelector: document.querySelectorAll('.mapple__table')[0],
         tableTagsSelectorClass: 'mapple__tags',
         tableRows: {}
@@ -61,6 +62,7 @@ const Mapple = function() {
 
         const marker = new google.maps.Marker({
             position: new google.maps.LatLng(geolocation[0],geolocation[1]),
+            icon: settings.markerImage,
             map: theMap,
             title: clientTitle
         });

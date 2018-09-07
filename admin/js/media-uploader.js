@@ -17,4 +17,12 @@ jQuery(document).ready(function($){
         });
         mediaUploader.open();
     });
+
+    $('[data-mappleuploadremove]').click(function(e) {
+        e.preventDefault();
+        var target = $('[data-mappleuploadremove]').data('mappleuploadremove');
+        console.log(target);
+        $('#'+target).val('');
+        $('#'+target+'-img').attr("src", '');
+    });
 });

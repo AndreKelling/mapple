@@ -101,14 +101,22 @@ class Mapple_Public {
 		$options 	= get_option( $this->plugin_name . '-options' );
 		$apiKey 	= $options['gmap-api-key'];
 		$styleJSON 	= $options['gmap-style-json'];
+		$markerImage 	= $options['gmap-marker-image'];
 
 		if(! empty($apiKey)){
 			wp_enqueue_script($this->plugin_name.'gmaps' , 'https://maps.googleapis.com/maps/api/js?key='.$apiKey, '', $this->version, true );
 
+			$dataToBePassed = array();
+
 			if(! empty($styleJSON)){
-				$dataToBePassed = array(
-					'styleJSON'            => json_decode($styleJSON)
-				);
+				$dataToBePassed['styleJSON'] = json_decode($styleJSON);
+			}
+
+			if(! empty($markerImage)){
+				$dataToBePassed['markerImage'] = $markerImage;
+			}
+
+			if (count($dataToBePassed) > 0) {
 				wp_localize_script( $this->plugin_name, 'mapple_vars', $dataToBePassed );
 			}
 		}
