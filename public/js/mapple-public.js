@@ -91,7 +91,8 @@ const Mapple = function() {
             return function() {
                 if (client.featured_media){
                     plugin.loadJSON('media/'+client.featured_media, function(response) {
-                        const clientImage =  '<br /><img src="'+response.media_details.sizes.thumbnail.source_url+'"/>';
+                        const imgUrl = response.media_details.sizes.thumbnail ? response.media_details.sizes.thumbnail.source_url : response.source_url;
+                        const clientImage =  '<br /><img src="'+imgUrl+'"/>';
                         settings.infowindow.setContent(clientImage + infowindowContent);
                         settings.infowindow.open(theMap, marker);
                     });
