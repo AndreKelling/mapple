@@ -16,7 +16,7 @@ To show a google map with the locations of your clients. You can output addition
 This plugin is for showing your clients.
 You can output a google map with markers and a table as a list of all clients.
 You can tag clients and show a search and filter bar.
-This Plugin does not need jQuery!
+This Plugin does not need jQuery on the FrontEnd!
 
 The google map is centered shown to all markers added. Markers got little Infowindows with client's name, website and address.
 Map Style customisation is possible.

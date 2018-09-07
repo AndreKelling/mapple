@@ -65,6 +65,17 @@ class Mapple_Admin {
 	}
 
 	/**
+	 * Register the JavaScript for the public-facing side of the site.
+	 *
+	 * @since    1.5.0
+	 */
+	function enqueue_scripts() {
+		wp_enqueue_media();
+		wp_register_script('media-uploader', plugins_url('js/media-uploader.js' , __FILE__ ), array('jquery'));
+		wp_enqueue_script('media-uploader');
+	}
+
+	/**
 	 * Adds a settings page link to a menu
 	 *
 	 * @link 		https://codex.wordpress.org/Administration_Menus
@@ -231,6 +242,36 @@ class Mapple_Admin {
 	} // field_textarea()
 
 	/**
+	 * Creates a image upload field
+	 *
+	 * @param 	array 		$args 			The arguments for the field
+	 * @return 	string 						The HTML field
+	 */
+	public function field_image( $args ) {
+
+		$defaults['class'] 			= 'widefat';
+		$defaults['description'] 	= '';
+		$defaults['label'] 			= '';
+		$defaults['name'] 			= $this->plugin_name . '-options[' . $args['id'] . ']';
+		$defaults['placeholder'] 	= '';
+		$defaults['type'] 			= 'text';
+		$defaults['value'] 			= '';
+
+		apply_filters( $this->plugin_name . '-field-text-options-defaults', $defaults );
+
+		$atts = wp_parse_args( $args, $defaults );
+
+		if ( ! empty( $this->options[$atts['id']] ) ) {
+
+			$atts['value'] = $this->options[$atts['id']];
+
+		}
+
+		include( plugin_dir_path( __FILE__ ) . 'partials/' . $this->plugin_name . '-admin-field-image.php' );
+
+	} // field_image()
+
+	/**
 	 * Returns an array of options names, fields types, and default values
 	 *
 	 * @return 		array 			An array of options
@@ -241,6 +282,7 @@ class Mapple_Admin {
 
 		$options[] = array( 'gmap-api-key', 'text', '' );
 		$options[] = array( 'gmap-style-json', 'text', '' );
+		$options[] = array( 'gmap-marker-image', 'text', '' );
 
 		return $options;
 
@@ -277,6 +319,19 @@ class Mapple_Admin {
 				'id' 			=> 'gmap-style-json',
 				'placeholder'   => esc_html__( 'put your JSON code inside here', 'mapple' ),
 				'rows'          => 24,
+			)
+		);
+
+		add_settings_field(
+			'gmap-marker-image',
+			apply_filters( $this->plugin_name . 'label-gmap-marker-image', esc_html__( 'Google Maps Marker Image', 'mapple' ) ),
+			array( $this, 'field_image' ),
+			$this->plugin_name,
+			$this->plugin_name . '-api',
+			array(
+				'description' 	=> esc_html__( 'Upload Image or paste in URL', 'mapple' ), // @todo add size info
+				'id' 			=> 'gmap-marker-image',
+				'placeholder'   => esc_html__( 'image path here...', 'mapple' ),
 			)
 		);
 	} // register_fields()
