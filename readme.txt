@@ -4,7 +4,7 @@ Donate link: https://andrekelling.de/
 Tags: google maps, client cpt, shortcode, no jquery, no style
 Requires at least: 4.7
 Tested up to: 4.9.5
-Stable tag: 1.4.1
+Stable tag: 1.5.0
 Requires PHP: 7.0
 License: GPLv3.0 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
@@ -19,7 +19,7 @@ You can tag clients and show a search and filter bar.
 This Plugin does not need jQuery on the FrontEnd!
 
 The google map is centered shown to all markers added. Markers got little Infowindows with client's name, website and address.
-Map Style customisation is possible.
+Map style and marker image customisation is possible.
 
 A few notes about technical things:
 
@@ -43,6 +43,10 @@ all `with-` attributes activate the tags coloumn, and filter when search is also
 
 `[mapple_clients with-tags="true" with-search="true"]`
 
+### Credit
+
+* Plugin banner image taken from <a href="https://unsplash.com/@rawpixel?utm_medium=referral&amp;utm_campaign=photographer-credit&amp;utm_content=creditBadge" target="_blank" rel="noopener noreferrer" title="Download free do whatever you want high-resolution photos from rawpixel">rawpixel</a>
+
 == Installation ==
 
 1. Upload the plugin files to the `/wp-content/plugins/plugin-name` directory, or install the plugin through the WordPress plugins screen directly.
@@ -57,6 +61,11 @@ all `with-` attributes activate the tags coloumn, and filter when search is also
 4. Enable search and filter section for clients in the table
 
 == Changelog ==
+
+= 1.5.0 =
+* enable google maps marker image customisation
+* fix infowindow opening when thumbnail image size missing
+* remove nowrap style from table title column
 
 = 1.4.1 =
 * fix JS error appearing on pages without mapple_clients table output

@@ -16,7 +16,7 @@ This Plugin does not need jQuery on the FrontEnd!
 ![Output of Map and Table](/../screenshots/screenshots/fe-output.jpg?raw=true "Output of Map and Table on the Front End")
 
 The google map is centered to all markers added. Markers got little Infowindows with client's name, website and address.
-Map Style customisation is possible.
+Map style and marker image customisation is possible.
 
 ![custom clients Post Type](/../screenshots/screenshots/be-post.jpg?raw=true "New custom clients Post Type with address autocompletion")
 
