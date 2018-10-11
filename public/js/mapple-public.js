@@ -39,19 +39,32 @@ const Mapple = function() {
         };
 
         const theMap = new google.maps.Map(el, myMapOptions);
+        const perPage = 100;
 
-        plugin.loadJSON('clients', function(response) {
-            for(let i = 0; i < response.length; i++) {
-
-				if (response[i].location){
-                    plugin.setMarker(response[i], i, theMap);
-				}
-
+        plugin.loadJSON('clients/?per_page='+perPage, function(response, total, pages) {
+            // first load get total count of pages
+            for(let i = 0; i < pages; i++) {
+                plugin.loadJSON('clients/?page='+(i+1)+'&per_page='+perPage, function(response) {
+                    //console.log(response);
+                    plugin.responseLoop(response, theMap);
+                });
             }
 
-            //now fit the map to the newly inclusive bounds
-            theMap.fitBounds(settings.bounds);
+            plugin.responseLoop(response, theMap);
         });
+    };
+
+    plugin.responseLoop = function(response, theMap) {
+        for(let i = 0; i < response.length; i++) {
+
+            if (response[i].location){
+                plugin.setMarker(response[i], i, theMap);
+            }
+
+        }
+
+        //now fit the map to the newly inclusive bounds
+        theMap.fitBounds(settings.bounds);
     };
 
     plugin.setMarker = function(client, i, theMap) {
@@ -113,7 +126,7 @@ const Mapple = function() {
         xobj.onreadystatechange = function () {
             if (xobj.readyState == 4 && xobj.status == '200') {
                 // Required use of an anonymous callback as .open will NOT return a value but simply returns undefined in asynchronous mode
-                callback(JSON.parse(xobj.responseText));
+                callback(JSON.parse(xobj.responseText), xobj.getResponseHeader("X-WP-Total"), xobj.getResponseHeader("X-WP-TotalPages"));
             }
         };
         xobj.send(null);

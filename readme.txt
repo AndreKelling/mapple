@@ -4,7 +4,7 @@ Donate link: https://andrekelling.de/
 Tags: google maps, client cpt, shortcode, no jquery, no style
 Requires at least: 4.7
 Tested up to: 4.9.5
-Stable tag: 1.5.0
+Stable tag: 1.5.1
 Requires PHP: 7.0
 License: GPLv3.0 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
@@ -25,6 +25,7 @@ A few notes about technical things:
 
 *   provides a new custom post type `clients`
 *   map functionality works over the REST_API
+*   the limit of fetched `clients` posts is unset. Beware of the risk fetching too much!!! (proper limitation feature is planned)
 
 ### Shortcodes
 
@@ -61,6 +62,9 @@ all `with-` attributes activate the tags coloumn, and filter when search is also
 4. Enable search and filter section for clients in the table
 
 == Changelog ==
+
+= 1.5.1 =
+* remove default 10 post entries limit from table and map
 
 = 1.5.0 =
 * enable google maps marker image customisation

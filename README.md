@@ -24,6 +24,7 @@ A few notes about technical things:
 
 *   provides a new custom post type `clients`
 *   map functionality works over the REST_API
+*   the limit of fetched `clients` posts is unset. Beware of the risk fetching too much!!! (proper limitation feature is planned)
 
 ### Shortcodes
 

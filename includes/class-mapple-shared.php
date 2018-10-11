@@ -136,13 +136,14 @@ class Mapple_Shared {
 		$args['no_found_rows']			= true;
 		$args['orderby'] 				= $params['orderby'];
         $args['order']                  = 'ASC';
-		$args['posts_per_page'] 		= absint( $params['quantity'] );
+		// @todo: insert option for shortcode to adjust qty when pagination feature is in
+        //$args['posts_per_page'] 		= absint( $params['quantity'] );
 		$args['post_status'] 			= 'publish';
 		$args['post_type'] 				= 'clients';
 		$args['update_post_term_cache'] = false;
 
 		unset( $params['orderby'] );
-		unset( $params['quantity'] );
+		//unset( $params['quantity'] );
 		unset( $params['listview'] );
 		unset( $params['singleview'] );
 

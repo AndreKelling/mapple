@@ -159,7 +159,9 @@ class Mapple_Public {
 
 		$defaults['loop-template'] 	= $this->plugin_name . '-loop-clients';
 		$defaults['orderby'] 		= 'title';
-		$defaults['quantity'] 		= 0;
+		// @todo: insert option for shortcode to adjust qty when pagination feature is in
+		//$defaults['quantity'] 		= 0; // is 10
+		$defaults['nopaging']         = true;
 
 		$shared 					= new Mapple_Shared( $this->plugin_name, $this->version );
 		// @todo: find a better approach to get the tags without the need calling `get_clients` a second time below
