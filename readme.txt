@@ -4,7 +4,7 @@ Donate link: https://andrekelling.de/
 Tags: google maps, client cpt, shortcode, no jquery, no style
 Requires at least: 4.7
 Tested up to: 4.9.5
-Stable tag: 1.5.1
+Stable tag: 1.5.2
 Requires PHP: 7.0
 License: GPLv3.0 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
@@ -54,6 +54,14 @@ all `with-` attributes activate the tags coloumn, and filter when search is also
 2. Activate the plugin through the 'Plugins' screen in WordPress
 3. Use the Clients->Settings screen to configure the plugin. Get a Google Maps API key and enter on this plugin's settings page.
 
+== Frequently Asked Questions ==
+
+= Why my images aren't loaded in the google map infobox? =
+
+If you have a JS error in your browser console that a GET request to the REST API of an media item failed.
+It might be that your requested image is WP internally connected to another post with another post-type which isn't open for REST requests.
+You can follow this guide for success: <a href="https://scottbolinger.com/custom-post-types-wp-api-v2/" target="_blank" rel="noopener noreferrer" title="Guide to allow REST support">https://scottbolinger.com/custom-post-types-wp-api-v2/</a>
+
 == Screenshots ==
 
 1. Output of Map and Table on the Front End. In between some text. You can place your shortcodes around.
@@ -62,6 +70,10 @@ all `with-` attributes activate the tags coloumn, and filter when search is also
 4. Enable search and filter section for clients in the table
 
 == Changelog ==
+
+= 1.5.2 =
+* fix google map infobox not opening if media request fails
+* add broken image for failed media request in infobox
 
 = 1.5.1 =
 * remove default 10 post entries limit from table and map

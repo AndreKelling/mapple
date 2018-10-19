@@ -106,7 +106,11 @@ const Mapple = function() {
             return function() {
                 if (client.featured_media){
                     plugin.loadJSON('media/'+client.featured_media, function(response) {
-                        const imgUrl = response.media_details.sizes.thumbnail ? response.media_details.sizes.thumbnail.source_url : response.source_url;
+                        let imgUrl = 'imagenotloaded';
+                        if (response != 'error'){
+                            imgUrl = response.media_details.sizes.thumbnail ? response.media_details.sizes.thumbnail.source_url : response.source_url;
+                        }
+
                         const clientImage =  '<br /><img src="'+imgUrl+'"/>';
                         settings.infowindow.setContent(clientImage + infowindowContent);
                         settings.infowindow.open(theMap, marker);
@@ -127,6 +131,8 @@ const Mapple = function() {
             if (xobj.readyState == 4 && xobj.status == '200') {
                 // Required use of an anonymous callback as .open will NOT return a value but simply returns undefined in asynchronous mode
                 callback(JSON.parse(xobj.responseText), xobj.getResponseHeader("X-WP-Total"), xobj.getResponseHeader("X-WP-TotalPages"));
+            } else {
+                callback('error');
             }
         };
         xobj.send(null);
